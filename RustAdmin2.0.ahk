@@ -60,10 +60,10 @@ return
 
 ; Login Window
 Login:
-global Login
+global Password
 	Gui,2: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
 	Gui,2: Add, Text,, Admin Password: 
-	Gui,2: Add, Edit, vLogin ym,%Login%
+	Gui,2: Add, Edit, vPassword ym,%Password%
 	Gui,2: Add, Button, default xm, OK
 	Gui,2: Show, NoActivate, RustAdmin RCON Login
 return
@@ -71,7 +71,7 @@ return
 2ButtonOK:
 	Gui,2:Submit
 	Gui,2:Destroy
-	SendExecute = rcon.login "%Login%"
+	SendExecute = rcon.login "%Password%"
 	ExecuteCommand(SendExecute)
 return
 
