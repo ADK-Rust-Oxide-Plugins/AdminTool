@@ -4,16 +4,8 @@
 ; ** 	https://github.com/buckeyemonkey/RustAdmin	        **
 ; ************************************************************
 
-MsgBox,0, Note from Developer:, This admin tool is programmed to download 2 files to your computer. A single image, and a .txt file. `n`nFunctionality will continue without the image, but you will not be able to spawn items without the .txt file. `n`nThis is just a notice for your acknowledgement. `n`nIt is suggested to make a folder somewhere on your computer and put all files in that folder, then make a shortcut to the .exe file. `n`n`nProgram source code can be found at https://github.com/krevan88/AdminTool. `n`nPress F2 to open the program menu.
-
-; Image for the Main Menu
-URLDownloadToFile, *0 http://i.imgur.com/1iG8Lme.png, %A_WorkingDir%\RAT_Logo.png
-; Required .txt file for Item Spawning Menu
-URLDownloadToFile, *0 http://pastebin.com/download.php?i=8AHr4rfy, %A_WorkingDir%\item_list.txt
-
 #NoEnv
 #SingleInstance force
-;#IfWinActive, PlayRust
 
 Airdrop = How Many Airdrops Do You Want?
 Password = InputPasswordHere
@@ -58,6 +50,7 @@ ShowMainMenu() {
 	Menu, HelpMenu, Add, Krevan's Twitter, Krevan
 	Menu, HelpMenu, Add, Special Thanks, Thanks
 	Menu, HelpMenu, Add, About Script, About
+	Menu, HelpMenu, Add, Download Resources, Download
 	Menu, MenuBar, Add, File, :FileMenu
 	Menu, MenuBar, Add, Rust Related, :RustMenu
 	Menu, MenuBar, Add, Help, :HelpMenu
@@ -66,7 +59,7 @@ ShowMainMenu() {
 	Gui,Main: +LastFound
 	Gui1 := WinExist()
 	Gui,Main: Menu, MenuBar
-	Gui,Main: Add, Picture, x10 y5 w300 h100 , %A_WorkingDir%\RAT_Logo.png
+	Gui,Main: Add, Picture, x10 y5 w300 h100 , %A_WorkingDir%\RustLogo.png
 	Gui,Main: Add, Text, x8 y107 w304 h1 0x7  ;Horizontal Line > Black
 	Gui,Main: Add, Button, x10 y110 w100 h30 gLogin, &Admin Login
 	Gui,Main: Add, Button, x110 y110 w100 h30 gLoadout , Admin &Loadout
@@ -131,6 +124,12 @@ Return
 Krevan:
 Run, http://www.twitter.com/krevan88
 return
+
+Download:
+; Image for the Main Menu
+URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/RustLogo.png, %A_WorkingDir%\RustLogo.png
+; Required .txt file for Item Spawning Menu
+URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/item_list.txt, %A_WorkingDir%\item_list.txt
  
 GuiShow:
  Gui, Show ; Retores the GUI
@@ -236,7 +235,7 @@ Notice:
 	Gui,5: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
 	Gui,5: Add, Text, x6 y7 w440 h20 +Center, Server Announcement Popup. Some symbols break the command. [! and " are known issues]
 	Gui,5: Add, Edit, x6 y27 w440 h20 vServerNotice,%ServerNotice%
-	Gui,5: Add, Button, x456 y7 w40 h40, OK
+	Gui,5: Add, Button, x456 y7 w40 h40 , OK
 	Gui,5: Show, , Server Announcement Input
 return
 
