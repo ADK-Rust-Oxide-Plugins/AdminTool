@@ -4,13 +4,15 @@
 ; ** 	https://github.com/buckeyemonkey/RustAdmin	        **
 ; ************************************************************
 ;
-;;; Button Version a0.1.0
+;;; Version 0.1.0
 ;
 
 #NoEnv
 #SingleInstance force
+;#IfWinActive, PlayRust
 
 TeleportPlayer = Krevan
+TeleportToPlayer = BuckeyeMonkey
 TeleportX := 909
 TeleportY := 359
 TeleportZ := 735
@@ -40,7 +42,6 @@ F12::
 return
 
 ; MainMenu
-ShowMainMenu() {
 	Gui,Main: +AlwaysOnTop +ToolWindow +Owner ; +Owner avoids a taskbar button
 	Gui,Main: Add, Button, x6 y7 w100 h30 gLogin , &Admin Login
 	Gui,Main: Add, Button, x106 y7 w100 h30 gLoadout , Admin &Loadout
@@ -55,7 +56,7 @@ ShowMainMenu() {
 	Gui,Main: Add, Button, x106 y97 w100 h30 gBan , Player &Ban
 	Gui,Main: Add, Button, x206 y97 w100 h30 gSteamID , SteamI&D Ban
 	Gui,Main: Show, NoActivate, Rust Admin Script Menu
-}
+return
 
 ; Login Window
 Login:
@@ -70,8 +71,8 @@ return
 2ButtonOK:
 	Gui,2:Submit
 	Gui,2:Destroy
-SendExecute = rcon.login "%Login%"
-ExecuteCommand(SendExecute)
+	SendExecute = rcon.login "%Login%"
+	ExecuteCommand(SendExecute)
 return
 
 2GuiClose:
