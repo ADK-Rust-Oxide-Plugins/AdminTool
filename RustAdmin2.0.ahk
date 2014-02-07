@@ -20,7 +20,7 @@ Ban = Player Name
 BanID = STEAM_0:1:12345678
 HackerName = Hacker Name
 Reason = Hacking and Spamming
-Say = Server will be restarting within a few minutes
+ServerNotice = Server will be restarting within a few minutes.
 Time = 12
 
 XCenter := A_ScreenWidth/2
@@ -29,7 +29,7 @@ YCenter := A_ScreenHeight/2
 Delay = 5000
 Stop = Yes
 
-MsgBox,0,Krevan's Rust Admin Tool,Follow the instructions below to run the program. Enjoy.`n`n1.) Run Rust in Windowed Mode (Check Below for Fullscreen Borderless) `n2.) Connect to your server. `n3.) Press F2 to open the Admin Script Menu `n4.) Click Login and Input Server Password `n5.) Enjoy :) `n`nShortcut Keys `n---------- `nF2 - Admin Menu `nF12 - Quit Script `n`nClick OK to launch Rust Admin Tool.`n`n`n`n`n`n`nPro Tip for Fullscreen Windowed mode:`nSteam Library > Rust Properties > Launch Options > -popupwindow
+MsgBox,0,Krevan's Rust Admin Tool,Follow the instructions below to run the program. Enjoy.`n`n1.) Run Rust in Windowed Mode (Check Below for Fullscreen Borderless) `n2.) Connect to your server. `n3.) Press F2 to open the Admin Script Menu `n4.) Click Login and Input Server Password `n5.) Enjoy :) `n`nShortcut Keys `n---------- `nF2 - Admin Menu `nF12 - Quit Script `n`nClick OK to launch Rust Admin Tool.`n`n`n`nPro Tip for Fullscreen Windowed Mode:`nSteam Library > Rust Properties > Launch Options > -popupwindow
 
 ; Shortcut Keys
 F2::
@@ -219,10 +219,10 @@ return
 
 ; Server Popup Announcement
 Notice:
-	global CustomNotice
+	global ServerNotice
 	Gui,5: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
 	Gui,5: Add, Text, x6 y7 w440 h20 +Center, Server Announcement Popup. Some symbols break the command. [! and " are known issues]
-	Gui,5: Add, Edit, x6 y27 w440 h20 vCustomNotice,%CustomNotice%
+	Gui,5: Add, Edit, x6 y27 w440 h20 vServerNotice,%ServerNotice%
 	Gui,5: Add, Button, x456 y7 w40 h40, OK
 	Gui,5: Show, , RustAdmin Custom Notice
 return
@@ -230,13 +230,12 @@ return
 5ButtonOK:
 	Gui,5:Submit
 	Gui,5:Destroy
-	SendNotice = notice.popupall "%CustomNotice%"
+	SendNotice = notice.popupall "%ServerNotice%"
 	ExecuteCommand(SendNotice)
 return
 
 5GuiClose:
 	Gui,5:Destroy
-return
 return
 
 ; Server and Player Status
