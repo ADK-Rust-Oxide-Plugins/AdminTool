@@ -4,10 +4,12 @@
 ; ** 	https://github.com/buckeyemonkey/RustAdmin	        **
 ; ************************************************************
 
+MsgBox,0, Note from Developer:, This admin tool is programmed to download 2 files to your computer. A single image, and a .txt file. `n`nFunctionality will continue without the image, but you will not be able to spawn items without the .txt file. `n`nThis is just a notice for your acknowledgement. `n`nIt is suggested to make a folder somewhere on your computer and put all files in that folder, then make a shortcut to the .exe file. `n`n`nProgram source code can be found at https://github.com/krevan88/AdminTool. `n`nPress F2 to open the program menu.
+
 ; Image for the Main Menu
-URLDownloadToFile, *0 https://www.dropbox.com/s/jj29apzi2qli5at/RustLogo.png, %A_WorkingDir%\RAT_Logo.png
+URLDownloadToFile, *0 http://i.imgur.com/1iG8Lme.png, %A_WorkingDir%\RAT_Logo.png
 ; Required .txt file for Item Spawning Menu
-URLDownloadToFile, *0 https://github.com/krevan88/AdminTool/blob/master/item_list.txt, %A_WorkingDir%\item_list.txt
+URLDownloadToFile, *0 http://pastebin.com/download.php?i=8AHr4rfy, %A_WorkingDir%\item_list.txt
 
 #NoEnv
 #SingleInstance force
@@ -49,14 +51,12 @@ return
 ShowMainMenu() {
 ; MainMenuMenu 
 	Menu, FileMenu, Add, Run Rust `t Ctrl+O, MenuOpenRust  ; See remarks below about Ctrl+O.
-	Menu, FileMenu, Add ; separator
 	Menu, FileMenu, Add, Exit, GuiClose
 	Menu, RustMenu, Add, PlayRust.com `t Ctrl+R, PlayRust
 	Menu, RustMenu, Add, Rust Trello, Trello
 	Menu, RustMenu, Add, RustOxide.com, RustOxide
 	Menu, HelpMenu, Add, Krevan's Twitter, Krevan
 	Menu, HelpMenu, Add, Special Thanks, Thanks
-	Menu, HelpMenu, Add ; separator
 	Menu, HelpMenu, Add, About Script, About
 	Menu, MenuBar, Add, File, :FileMenu
 	Menu, MenuBar, Add, Rust Related, :RustMenu
@@ -329,7 +329,7 @@ SpawnItems:
 	Gui,7: Add, Radio, x266 y7 w80 h20 , All Players
 	XPOSMOD := 0
 	YPOSMOD := 1.5
-	Loop, read, %A_ScriptDir%\item_list.txt
+	Loop, read, %A_WorkingDir%\item_list.txt
 	{
 		StringSplit, param_array, A_LoopReadLine, %A_Tab%
 		YPOS := (YPOSMOD * 25) + 10
@@ -416,7 +416,7 @@ return
 	Gui,7:Submit
 	Gui,7:Destroy
 	
-	Loop, read, %A_ScriptDir%\item_list.txt
+	Loop, read, %A_WorkingDir%\item_list.txt
 	{
 		StringSplit, param_array, A_LoopReadLine, %A_Tab% 
 		if (Items%A_Index%_1 = 1) {
