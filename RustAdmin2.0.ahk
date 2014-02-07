@@ -1,7 +1,7 @@
 ; ************************************************************
 ; ** 	Krevan88's Rust Admin Script                        **
 ; **	Original Concept by [ABSO]BuckeyeMonkey             **
-; ** 	http://github.com/buckeyemonkey/RustAdmin	        **
+; ** 	https://github.com/buckeyemonkey/RustAdmin	        **
 ; ************************************************************
 ;
 ;;; Version a0.1.0
@@ -22,9 +22,6 @@ return
 
 ; MainMenu
 ShowMainMenu() {
-	Menu, FileMenu, Add, StartRust
-	Menu, MenuBar, Add, &File, :FileMenu
-	Gui, Menu, MenuBar
 	Gui,Main: +AlwaysOnTop +ToolWindow +Owner ; +Owner avoids a taskbar button
 	Gui,Main: Add, Button, x6 y7 w100 h30 gLogin , &Admin Login
 	Gui,Main: Add, Text, Center x106 y7 w100 h30 gLoadout , Admin &Loadout
@@ -40,8 +37,6 @@ ShowMainMenu() {
 	Gui,Main: Add, Button, x206 y97 w100 h30 gSteamID , SteamI&D Ban
 	Gui,Main: Show, NoActivate, Rust Admin Script Menu
 }
-
-StartRust:
 
 ; Login Window
 Login:
