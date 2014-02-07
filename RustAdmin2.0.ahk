@@ -29,7 +29,7 @@ YCenter := A_ScreenHeight/2
 Delay = 5000
 Stop = Yes
 
-MsgBox,0,Krevan's Rust Admin Tool, Shortcut Keys:`n=========`n`nF2: Main Menu`nF12: Close Script
+MsgBox,0,Krevan's Rust Admin Tool,Follow the instructions below to run the program. Enjoy.`n`n1.) Run Rust in Windowed Mode (Check Below for Fullscreen Borderless) `n2.) Connect to your server. `n3.) Press F2 to open the Admin Script Menu `n4.) Click Login and Input Server Password `n5.) Enjoy :) `n`nShortcut Keys `n---------- `nF2 - Admin Menu `nF12 - Quit Script `n`nClick OK to launch Rust Admin Tool.`n`n`n`n`n`n`nPro Tip for Fullscreen Windowed mode:`nSteam Library > Rust Properties > Launch Options > -popupwindow
 
 ; Shortcut Keys
 F2::
@@ -51,7 +51,7 @@ ShowMainMenu() {
 	Menu, OptionsMenu, Add, Rust &Trello, Trello
 	Menu, OptionsMenu, Add, &RustOxide.com, RustOxide
 	Menu, HelpMenu, Add, &About Script, About
-	Menu, HelpMenu, Add, Krevan&88 Twitter, Krevan
+	Menu, HelpMenu, Add, &Krevan's Twitter, Krevan
 	Menu, MenuBar, Add, &File, :FileMenu
 	Menu, MenuBar, Add, &Options, :OptionsMenu
 	Menu, MenuBar, Add, &Help, :HelpMenu
@@ -76,7 +76,7 @@ ShowMainMenu() {
 return
 }
 
-;******************************************************
+; Menu Bar Begin ******************************************************
  
 #IfWinActive Menu Test ahk_class AutoHotkeyGUI
 ^o::  ; The Ctrl+O hotkey.
@@ -142,7 +142,7 @@ IsMenuItemChecked( MenuPos, SubMenuPos, hWnd ) { ; By Obi / Lexikos
 Return ( NumGet(mii, 12) & 0x8 ) ? 1 : 0
 }
 
-;******************************************************
+; Menu Bar End ******************************************************
 
 ; Login Window
 Login:
