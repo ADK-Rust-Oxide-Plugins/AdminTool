@@ -7,7 +7,10 @@
 ;;; Version a0.1.0
 ;
 
-; MsgBox,0,Krevan's Rust Admin Script v2,This is a complete rewrite of BuckeyeMonkey's Rust Admin Script. You can find the original at http://www.github.com/buckeyemonkey.`n
+#NoEnv
+#SingleInstance force
+
+; MsgBox,0,Script Loaded...
 
 ; Shortcut Keys
 F2::
@@ -280,38 +283,38 @@ return
 ; Admin/Player Teleportation
 Teleport:
 	global TeleportChoice,TeleportPlayer,TeleportToPlayer,TeleportX,TeleportY,TeleportZ
-	Gui,Port: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
-	Gui,Port: Add, Text, x6 y7 w40 h20 , Player:
-	Gui,Port: Add, Edit, x46 y7 w110 h20 vTeleportPlayer, %TeleportPlayer%
-	Gui,Port: Add, Radio, x166 y7 w70 h20 vTeleportChoice, To Player
-	Gui,Port: Add, Radio, x246 y7 w60 h20 Checked, To XYZ
-	Gui,Port: Add, Radio, x6 y67 w140 h20 +Center, Mount Everrust
-	Gui,Port: Add, Radio, x6 y87 w140 h20 +Center, Rad Town (North)
-	Gui,Port: Add, Radio, x6 y107 w140 h20 +Center, Rad Town (South)
-	Gui,Port: Add, Radio, x6 y127 w140 h20 +Center, Rad Town (East)
-	Gui,Port: Add, Radio, x6 y147 w140 h20 +Center, Rad Town (West)
-	Gui,Port: Add, Radio, x166 y67 w140 h20 +Center, Checkpoints
-	Gui,Port: Add, Radio, x166 y87 w140 h20 +Center, Sheds
-	Gui,Port: Add, Radio, x166 y107 w140 h20 +Center, Hangar
-	Gui,Port: Add, Radio, x166 y127 w140 h20 +Center, Bunkers
-	Gui,Port: Add, Radio, x166 y147 w140 h20 +Center, Resource Valley
-	Gui,Port: Add, Text, x6 y37 w40 h20 , Target:
-	Gui,Port: Add, Edit, x46 y37 w110 h20 vTeleportToPlayer, %TeleportToPlayer%
-	Gui,Port: Add, Text, x166 y37 w10 h20 , X:
-	Gui,Port: Add, Edit, x176 y37 w30 h20 vTeleportX, %TeleportX%
-	Gui,Port: Add, Text, x216 y37 w10 h20 , Y:
-	Gui,Port: Add, Edit, x226 y37 w30 h20 vTeleportY, %TeleportY%
-	Gui,Port: Add, Text, x266 y37 w10 h20 , Z:
-	Gui,Port: Add, Edit, x276 y37 w30 h20 vTeleportZ, %TeleportZ%
-	Gui,Port: Add, Text, x6 y220 +center, Map Coords Grabbed from: http://tinyurl.com/RustCoordMap
-	Gui,Port: Add, Button, x6 y177 w300 h30 , OK
-	Gui,Port: Show, NoActivate, RustAdmin Teleport
+	Gui,9: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
+	Gui,9: Add, Text, x6 y7 w40 h20 , Player:
+	Gui,9: Add, Edit, x46 y7 w110 h20 vTeleportPlayer, %TeleportPlayer%
+	Gui,9: Add, Radio, x166 y7 w70 h20 vTeleportChoice, To Player
+	Gui,9: Add, Radio, x246 y7 w60 h20 Checked, To XYZ
+	Gui,9: Add, Radio, x6 y67 w140 h20 +Center, Mount Everrust
+	Gui,9: Add, Radio, x6 y87 w140 h20 +Center, Rad Town (North)
+	Gui,9: Add, Radio, x6 y107 w140 h20 +Center, Rad Town (South)
+	Gui,9: Add, Radio, x6 y127 w140 h20 +Center, Rad Town (East)
+	Gui,9: Add, Radio, x6 y147 w140 h20 +Center, Rad Town (West)
+	Gui,9: Add, Radio, x166 y67 w140 h20 +Center, Checkpoints
+	Gui,9: Add, Radio, x166 y87 w140 h20 +Center, Sheds
+	Gui,9: Add, Radio, x166 y107 w140 h20 +Center, Hangar
+	Gui,9: Add, Radio, x166 y127 w140 h20 +Center, Bunkers
+	Gui,9: Add, Radio, x166 y147 w140 h20 +Center, Resource Valley
+	Gui,9: Add, Text, x6 y37 w40 h20 , Target:
+	Gui,9: Add, Edit, x46 y37 w110 h20 vTeleportToPlayer, %TeleportToPlayer%
+	Gui,9: Add, Text, x166 y37 w10 h20 , X:
+	Gui,9: Add, Edit, x176 y37 w30 h20 vTeleportX, %TeleportX%
+	Gui,9: Add, Text, x216 y37 w10 h20 , Y:
+	Gui,9: Add, Edit, x226 y37 w30 h20 vTeleportY, %TeleportY%
+	Gui,9: Add, Text, x266 y37 w10 h20 , Z:
+	Gui,9: Add, Edit, x276 y37 w30 h20 vTeleportZ, %TeleportZ%
+	Gui,9: Add, Text, x6 y220 +center, Map Coords Grabbed from: http://tinyurl.com/RustCoordMap
+	Gui,9: Add, Button, x6 y177 w300 h30 , OK
+	Gui,9: Show, NoActivate, RustAdmin Teleport
 return
 
-PortButtonOK:
+9ButtonOK:
 	global TeleportChoice,TeleportPlayer,TeleportToPlayer,TeleportX,TeleportY,TeleportZ
-	Gui,Port:Submit
-	Gui,Port:Destroy
+	Gui,9:Submit
+	Gui,9:Destroy
 	if (TeleportChoice = 1) {
 		TPCommand = teleport.toplayer "%TeleportPlayer%" "%TeleportToPlayer%"
 	}
@@ -351,8 +354,8 @@ PortButtonOK:
 	ExecuteCommand(TPCommand)
 return
 
-PortGuiClose:
-	Gui,Port:Destroy
+9GuiClose:
+	Gui,9:Destroy
 return
 
 ; Server Time Cycle
