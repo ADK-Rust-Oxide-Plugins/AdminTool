@@ -8,6 +8,7 @@
 #SingleInstance force
 ;#IfWinActive, PlayRust
 
+Airdrop = How Many Airdrops Do You Want?
 Password = InputPasswordHere
 ItemPlayer = Krevan
 TeleportPlayer = Krevan
@@ -29,8 +30,6 @@ YCenter := A_ScreenHeight/2
 Delay = 5000
 Stop = Yes
 
-MsgBox,0,Krevan's Rust Admin Tool,Follow the instructions below to run the program. Enjoy.`n`n1.) Run Rust in Windowed Mode (Check Below for Fullscreen Borderless) `n2.) Connect to your server. `n3.) Press F2 to open the Admin Script Menu `n4.) Click Login and Input Server Password `n5.) Enjoy :) `n`nShortcut Keys `n---------- `nF2 - Admin Menu `nF12 - Quit Script `n`nClick OK to launch Rust Admin Tool.`n`n`n`nPro Tip for Fullscreen Windowed Mode:`nSteam Library > Rust Properties > Launch Options > -popupwindow
-
 ; Shortcut Keys
 F2::
 	ShowMainMenu()
@@ -44,17 +43,19 @@ return
 
 ShowMainMenu() {
 ; MainMenuMenu 
-	Menu, FileMenu, Add, &Open Rust `t Ctrl+O, MenuOpenRust  ; See remarks below about Ctrl+O.
+	Menu, FileMenu, Add, Run Rust `t Ctrl+O, MenuOpenRust  ; See remarks below about Ctrl+O.
 	Menu, FileMenu, Add ; separator
-	Menu, FileMenu, Add, E&xit, GuiClose
-	Menu, RustMenu, Add, &PlayRust.com `t Ctrl+R, PlayRust
-	Menu, RustMenu, Add, Rust &Trello, Trello
-	Menu, RustMenu, Add, &RustOxide.com, RustOxide
-	Menu, HelpMenu, Add, &About Script, About
-	Menu, HelpMenu, Add, &Krevan's Twitter, Krevan
-	Menu, MenuBar, Add, &File, :FileMenu
-	Menu, MenuBar, Add, &Rust Related, :RustMenu
-	Menu, MenuBar, Add, &Help, :HelpMenu
+	Menu, FileMenu, Add, Exit, GuiClose
+	Menu, RustMenu, Add, PlayRust.com `t Ctrl+R, PlayRust
+	Menu, RustMenu, Add, Rust Trello, Trello
+	Menu, RustMenu, Add, RustOxide.com, RustOxide
+	Menu, HelpMenu, Add, Krevan's Twitter, Krevan
+	Menu, HelpMenu, Add, Special Thanks, Thanks
+	Menu, HelpMenu, Add ; separator
+	Menu, HelpMenu, Add, About Script, About
+	Menu, MenuBar, Add, File, :FileMenu
+	Menu, MenuBar, Add, Rust Related, :RustMenu
+	Menu, MenuBar, Add, Help, :HelpMenu
 	Menu, Tray, Add, Restore Window, GuiShow
 	Menu, Tray, Default, Restore Window
 	Gui,Main: +LastFound
@@ -73,7 +74,7 @@ ShowMainMenu() {
 	Gui,Main: Add, Button, x10 y195 w100 h30 gKick , Player &Kick
 	Gui,Main: Add, Button, x110 y195 w100 h30 gBan , Player &Ban
 	Gui,Main: Add, Button, x210 y195 w100 h30 gSteamID , SteamI&D Ban
-	Gui,Main: Show, , Krevan's Rust Admin Script Menu
+	Gui,Main: Show, , Krevan's Rust Admin Tool
 return
 }
 
@@ -113,7 +114,12 @@ return
 
 About:
  Gui +OwnDialogs
-  MsgBox,, About Menu.ahk, Krevan88's Rust Admin Script v2.0 `nhttp://github.com/krevan88/AdminTool `n`nOriginal Version by [ABSO]BuckeyeMonkey `nhttps://github.com/buckeyemonkey/RustAdmin `n
+  MsgBox,, About Rust Admin Tool, Krevan88's Rust Admin Script v2.0 `nhttp://github.com/krevan88/AdminTool `n`nOriginal Version by [ABSO]BuckeyeMonkey `nhttps://github.com/buckeyemonkey/RustAdmin `n`n================================ `n`nFollow the instructions below to run the program. Enjoy.`n`n1.) Run Rust in Windowed Mode (Check Below for Fullscreen Borderless) `n2.) Connect to your server. `n3.) Press F2 to open the Admin Script Menu `n4.) Click Login and Input Server Password `n5.) Enjoy :) `n`n================================ `n`nShortcut Keys `n---------- `nF2 - Admin Menu `nF12 - Quit Script `n`n================================ `n`nPro Tip for Fullscreen Windowed Mode:`nSteam Library > Rust Properties > Launch Options > -popupwindow
+Return
+
+Thanks:
+ Gui +OwnDialogs
+  MsgBox,, Special Thanks, There are a lot of people I would like to thank for helping me. `n`n- BuckeyeMonkey @ GitHub for letting me take over this project and make it mine.`n`n- Proxywars @ GitHub for giving me some initial help with the basic commands of AutoHotKey `n`n- twiz @ AHK Community IRC for the help with building the menus and some bug fixing. `n`n- tlm @ AHK Community IRC for helping me troubleshoot issues with the item spawning bug. `n`n- iSkilz @ AHK Community IRC for helping with a program breaking bug in the console commands. `n`n- Church @ PMS Clan Community for helping with the graphics of the program.
 Return
 
 Krevan:
@@ -152,7 +158,7 @@ global Password
 	Gui,2: Add, Text,, Admin Password: 
 	Gui,2: Add, Edit, vPassword ym,%Password%
 	Gui,2: Add, Button, default xm, OK
-	Gui,2: Show, , RustAdmin RCON Login
+	Gui,2: Show, , Login to Server RCON
 return
 
 2ButtonOK:
@@ -201,7 +207,7 @@ GodMode:
 	Gui,4: Add, Radio, vGodModeChoice Checked, On 
 	Gui,4: Add, Radio, , Off 
 	Gui,4: Add, Button, default xm, OK
-	Gui,4: Show, , God Mode Toggle
+	Gui,4: Show, , God Mode
 return
 
 4ButtonOK:
@@ -225,7 +231,7 @@ Notice:
 	Gui,5: Add, Text, x6 y7 w440 h20 +Center, Server Announcement Popup. Some symbols break the command. [! and " are known issues]
 	Gui,5: Add, Edit, x6 y27 w440 h20 vServerNotice,%ServerNotice%
 	Gui,5: Add, Button, x456 y7 w40 h40, OK
-	Gui,5: Show, , RustAdmin Custom Notice
+	Gui,5: Show, , Server Announcement Input
 return
 
 5ButtonOK:
@@ -326,7 +332,7 @@ SpawnItems:
 		XPOSNUM := 175 + (XPOSMOD * 200)
 		Gui,7: Add, Checkbox, vItems%A_Index%_1 X%XPOS% Y%YPOS%, %param_array1%
 		Gui,7: Add, Edit, w27 h20 vItems%A_Index%_2 X%XPOSNUM% Y%YPOSNUM%, %param_array2%
-		if (Mod(A_Index,35) = 0) {
+		if (Mod(A_Index,40) = 0) {
 			XPOSMOD := XPOSMOD + 1
 			YPOSMOD := 1.5
 		}
@@ -429,7 +435,7 @@ Supply:
 	Gui,8: Add, Text,, Airdrop:
 	Gui,8: Add, Edit, vAirdrop ym,%Airdrop%
 	Gui,8: Add, Button, default xm, OK
-	Gui,8: Show, , Airdrop Count
+	Gui,8: Show, , Resupply Drop
 return
 
 8ButtonOK:
@@ -480,7 +486,7 @@ Teleport:
 	Gui,9: Add, Edit, x276 y37 w30 h20 vTeleportZ, %TeleportZ%
 	Gui,9: Add, Text, x6 y220 +center, Map Coords Grabbed from: http://tinyurl.com/RustCoordMap
 	Gui,9: Add, Button, x6 y177 w300 h30 , OK
-	Gui,9: Show, NoActivate, RustAdmin Teleport
+	Gui,9: Show, NoActivate, Teleportation Tool
 return
 
 9ButtonOK:
@@ -537,7 +543,7 @@ Time:
 	Gui,10: Add, Text,, What Time Would You Like? (0-24)
 	Gui,10: Add, Edit, vTime ym,%Time%
 	Gui,10: Add, Button, default xm, OK
-	Gui,10: Show, NoActivate, RustAdmin Time Options
+	Gui,10: Show, NoActivate, Server Time Adjustment Options
 return
 
 10ButtonOK:
@@ -556,11 +562,11 @@ Kick:
 	global Kick,Reason
 	Gui,11: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
 	Gui,11: Add, Text,, Kick:
-	Gui,11: Add, Edit, vKick ym,%Kick%
+	Gui,11: Add, Edit, vKick ,%Kick%
 	Gui,11: Add, Text,, Reason:
 	Gui,11: Add, Edit, vReason,%Reason%
 	Gui,11: Add, Button, default xm, OK
-	Gui,11: Show, NoActivate, Kick Menu
+	Gui,11: Show, NoActivate, Player Kick Menu
 return
 
 11ButtonOK:
@@ -580,11 +586,11 @@ Ban:
 	global Ban,Reason
 	Gui,12: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
 	Gui,12: Add, Text,, Ban:
-	Gui,12: Add, Edit, vBan ym,%Ban%
+	Gui,12: Add, Edit, vBan ,%Ban%
 	Gui,12: Add, Text,, Reason:
 	Gui,12: Add, Edit, vReason,%Reason%
 	Gui,12: Add, Button, default xm, OK
-	Gui,12: Show, NoActivate, Ban Menu
+	Gui,12: Show, NoActivate, Player Ban Menu
 return
 
 12ButtonOK:
@@ -606,14 +612,14 @@ SteamID:
 	global HackerName
 	global Reason
 	Gui,13: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
-	Gui,13: Add, Text,, Steam ID:
-	Gui,13: Add, Edit, vBanid ym,%BanID%
-	Gui,13: Add, Text, X10 Y35, Username:
-	Gui,13: Add, Edit, vUsername X68 Y35,%HackerName%
-	Gui,13: Add, Text,, Reason:
-	Gui,13: Add, Edit, vReason,%Reason%
+	Gui,13: Add, Text, , Steam ID:
+	Gui,13: Add, Edit, vBanid ,%BanID%
+	Gui,13: Add, Text, , Username:
+	Gui,13: Add, Edit, vHackerName ,%HackerName%
+	Gui,13: Add, Text, , Reason:
+	Gui,13: Add, Edit, vReason ,%Reason%
 	Gui,13: Add, Button, default xm, OK
-	Gui,13: Show, NoActivate, Steam Ban
+	Gui,13: Show, NoActivate, Player SteamID Ban
 return
 
 13ButtonOK:
