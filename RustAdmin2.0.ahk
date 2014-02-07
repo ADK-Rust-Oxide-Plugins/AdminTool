@@ -8,6 +8,7 @@
 #SingleInstance force
 ;#IfWinActive, PlayRust
 
+Password = InputPasswordHere
 ItemPlayer = Krevan
 TeleportPlayer = Krevan
 TeleportToPlayer = BuckeyeMonkey
@@ -42,22 +43,106 @@ F12::
 return
 
 ShowMainMenu() {
-; MainMenu
-	Gui,Main: Add, Button, x6 y7 w100 h30 gLogin, &Admin Login
-	Gui,Main: Add, Button, x106 y7 w100 h30 gLoadout , Admin &Loadout
-	Gui,Main: Add, Button, x206 y7 w100 h30 gGodMode , &God Mode
-	Gui,Main: Add, Button, x6 y37 w100 h30 gNotice , Server &Notice
-	Gui,Main: Add, Button, x106 y37 w100 h30 gStatus , Server &Status
-	Gui,Main: Add, Button, x206 y37 w100 h30 gSpawnItems , Spawn &Items
-	Gui,Main: Add, Button, x6 y67 w100 h30 gSupply , Supply &Drop
-	Gui,Main: Add, Button, x106 y67 w100 h30 gTeleport , &Teleporting
-	Gui,Main: Add, Button, x206 y67 w100 h30 gTime , Time &Cycle
-	Gui,Main: Add, Button, x6 y97 w100 h30 gKick , Player &Kick
-	Gui,Main: Add, Button, x106 y97 w100 h30 gBan , Player &Ban
-	Gui,Main: Add, Button, x206 y97 w100 h30 gSteamID , SteamI&D Ban
-	Gui,Main: Show, w310 h130 , Krevan's Rust Admin Script Menu
+; MainMenuMenu 
+	Menu, FileMenu, Add, &Open Rust `t Ctrl+O, MenuOpenRust  ; See remarks below about Ctrl+O.
+	Menu, FileMenu, Add ; separator
+	Menu, FileMenu, Add, E&xit, GuiClose
+	Menu, OptionsMenu, Add, &PlayRust.com `t Ctrl+R, PlayRust
+	Menu, OptionsMenu, Add, Rust &Trello, Trello
+	Menu, OptionsMenu, Add, &RustOxide.com, RustOxide
+	Menu, HelpMenu, Add, &About Script, About
+	Menu, HelpMenu, Add, Krevan&88 Twitter, Krevan
+	Menu, MenuBar, Add, &File, :FileMenu
+	Menu, MenuBar, Add, &Options, :OptionsMenu
+	Menu, MenuBar, Add, &Help, :HelpMenu
+	Menu, Tray, Add, Restore Window, GuiShow
+	Menu, Tray, Default, Restore Window
+	Gui,Main: +LastFound
+	Gui1 := WinExist()
+	Gui,Main: Menu, MenuBar
+	Gui,Main: Add, Button, x10 y10 w100 h30 gLogin, &Admin Login
+	Gui,Main: Add, Button, x110 y10 w100 h30 gLoadout , Admin &Loadout
+	Gui,Main: Add, Button, x210 y10 w100 h30 gGodMode , &God Mode
+	Gui,Main: Add, Button, x10 y40 w100 h30 gNotice , Server &Notice
+	Gui,Main: Add, Button, x110 y40 w100 h30 gStatus , Server &Status
+	Gui,Main: Add, Button, x210 y40 w100 h30 gSpawnItems , Spawn &Items
+	Gui,Main: Add, Button, x10 y70 w100 h30 gSupply , Supply &Drop
+	Gui,Main: Add, Button, x110 y70 w100 h30 gTeleport , &Teleporting
+	Gui,Main: Add, Button, x210 y70 w100 h30 gTime , Time &Cycle
+	Gui,Main: Add, Button, x10 y100 w100 h30 gKick , Player &Kick
+	Gui,Main: Add, Button, x110 y100 w100 h30 gBan , Player &Ban
+	Gui,Main: Add, Button, x210 y100 w100 h30 gSteamID , SteamI&D Ban
+	Gui,Main: Show, , Krevan's Rust Admin Script Menu
 return
 }
+
+;******************************************************
+ 
+#IfWinActive Menu Test ahk_class AutoHotkeyGUI
+^o::  ; The Ctrl+O hotkey.
+MenuOpenRust:
+IfWinNotExist, PlayRust
+{
+    ; Launch Rust game via Steam AppID
+    Run steam://run/252490
+    WinWaitActive, PlayRust Configuration, , 10
+}
+
+if WinExist("PlayRust Configuration") or WinExist(ahk_class #32770)
+{
+    WinActivate
+    WinWaitActive, PlayRust Configuration, , 5
+    Send {Enter}
+}
+Return
+
+PlayRust:
+#IfWinActive Menu Test ahk_class AutoHotkeyGUI
+^r::  ; The Ctrl+R hotkey.
+Run, http://www.playrust.com
+return
+
+Trello:
+Run, https://trello.com/b/lG8jtz6v/rust-main
+return
+
+RustOxide:
+Run, http://forum.rustoxide.com
+return
+
+About:
+ Gui +OwnDialogs
+  MsgBox,, About Menu.ahk, Krevan88's Rust Admin Script v2.0 `nhttp://github.com/krevan88/AdminTool `n`nOriginal Version by [ABSO]BuckeyeMonkey `nhttps://github.com/buckeyemonkey/RustAdmin `n
+Return
+
+Krevan:
+Run, http://www.twitter.com/krevan88
+return
+ 
+GuiShow:
+ Gui, Show ; Retores the GUI
+Return
+ 
+GuiClose:   ; Triggered by the X button in the top bar
+  If (vTrayClose = 1)   ; Close button checks if CloseToTray is enabled
+  {
+    Gui, Hide   ; Hides the GUI, rather than closing
+  } else {
+    FileClose:   ; File->Exit will always Exit
+    ExitApp ; Closes the app
+  }
+Return
+ 
+IsMenuItemChecked( MenuPos, SubMenuPos, hWnd ) { ; By Obi / Lexikos
+;Original version: www.autohotkey.com/forum/viewtopic.php?p=203606#203606
+ hMenu :=DllCall("GetMenu", UInt,hWnd )
+ hSubMenu := DllCall("GetSubMenu", UInt,hMenu, Int,MenuPos )
+ VarSetCapacity(mii, 48, 0), NumPut(48, mii, 0), NumPut(1, mii, 4)
+ DllCall( "GetMenuItemInfo", UInt,hSubMenu, UInt,SubMenuPos, Int, 1, UInt,&mii )
+Return ( NumGet(mii, 12) & 0x8 ) ? 1 : 0
+}
+
+;******************************************************
 
 ; Login Window
 Login:
