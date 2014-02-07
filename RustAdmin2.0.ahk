@@ -10,7 +10,7 @@
 #NoEnv
 #SingleInstance force
 
-; MsgBox,0,Script Loaded...
+; MsgBox,0,Shortcut Keys:`nF2: Main Menu`nF12: Close Script
 
 ; Shortcut Keys
 F2::
