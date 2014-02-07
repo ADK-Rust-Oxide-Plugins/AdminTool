@@ -4,6 +4,9 @@
 ; ** 	https://github.com/buckeyemonkey/RustAdmin	        **
 ; ************************************************************
 
+URLDownloadToFile, *0 https://www.dropbox.com/s/jj29apzi2qli5at/RustLogo.png, %A_WorkingDir%\RustLogo.png
+URLDownloadToFile, *0 https://github.com/krevan88/AdminTool/blob/master/item_list.txt, %A_WorkingDir%\item_list.txt
+
 #NoEnv
 #SingleInstance force
 ;#IfWinActive, PlayRust
@@ -61,19 +64,20 @@ ShowMainMenu() {
 	Gui,Main: +LastFound
 	Gui1 := WinExist()
 	Gui,Main: Menu, MenuBar
-	Gui,Main: Add, Picture, x10 y0 w300 h100 , %A_ScriptDir%\media\RustLogo.png
-	Gui,Main: Add, Button, x10 y105 w100 h30 gLogin, &Admin Login
-	Gui,Main: Add, Button, x110 y105 w100 h30 gLoadout , Admin &Loadout
-	Gui,Main: Add, Button, x210 y105 w100 h30 gGodMode , &God Mode
-	Gui,Main: Add, Button, x10 y135 w100 h30 gNotice , Server &Notice
-	Gui,Main: Add, Button, x110 y135 w100 h30 gStatus , Server &Status
-	Gui,Main: Add, Button, x210 y135 w100 h30 gSpawnItems , Spawn &Items
-	Gui,Main: Add, Button, x10 y165 w100 h30 gSupply , Supply &Drop
-	Gui,Main: Add, Button, x110 y165 w100 h30 gTeleport , &Teleporting
-	Gui,Main: Add, Button, x210 y165 w100 h30 gTime , Time &Cycle
-	Gui,Main: Add, Button, x10 y195 w100 h30 gKick , Player &Kick
-	Gui,Main: Add, Button, x110 y195 w100 h30 gBan , Player &Ban
-	Gui,Main: Add, Button, x210 y195 w100 h30 gSteamID , SteamI&D Ban
+	Gui,Main: Add, Picture, x10 y5 w300 h100 , %A_WorkingDir%\RustLogo.png
+	Gui,Main: Add, Text, x8 y107 w304 h1 0x7  ;Horizontal Line > Black
+	Gui,Main: Add, Button, x10 y110 w100 h30 gLogin, &Admin Login
+	Gui,Main: Add, Button, x110 y110 w100 h30 gLoadout , Admin &Loadout
+	Gui,Main: Add, Button, x210 y110 w100 h30 gGodMode , &God Mode
+	Gui,Main: Add, Button, x10 y140 w100 h30 gNotice , Server &Notice
+	Gui,Main: Add, Button, x110 y140 w100 h30 gStatus , Server &Status
+	Gui,Main: Add, Button, x210 y140 w100 h30 gSpawnItems , Spawn &Items
+	Gui,Main: Add, Button, x10 y170 w100 h30 gSupply , Supply &Drop
+	Gui,Main: Add, Button, x110 y170 w100 h30 gTeleport , &Teleporting
+	Gui,Main: Add, Button, x210 y170 w100 h30 gTime , Time &Cycle
+	Gui,Main: Add, Button, x10 y200 w100 h30 gKick , Player &Kick
+	Gui,Main: Add, Button, x110 y200 w100 h30 gBan , Player &Ban
+	Gui,Main: Add, Button, x210 y200 w100 h30 gSteamID , SteamI&D Ban
 	Gui,Main: Show, , Krevan's Rust Admin Tool
 return
 }
@@ -323,7 +327,7 @@ SpawnItems:
 	Gui,7: Add, Radio, x266 y7 w80 h20 , All Players
 	XPOSMOD := 0
 	YPOSMOD := 1.5
-	Loop, read, %A_WorkingDir%\item_list.txt
+	Loop, read, %A_ScriptDir%\item_list.txt
 	{
 		StringSplit, param_array, A_LoopReadLine, %A_Tab%
 		YPOS := (YPOSMOD * 25) + 10
