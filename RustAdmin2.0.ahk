@@ -11,6 +11,8 @@
 #SingleInstance force
 #IfWinActive, PlayRust
 
+AHKFiles = %A_WorkingDir%
+
 ItemPlayer = Krevan
 TeleportPlayer = Krevan
 TeleportToPlayer = BuckeyeMonkey
