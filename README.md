@@ -22,18 +22,14 @@ Instructions:
 
 Additional Instructions:
 =========
-1) MAKE SURE "item_list.txt" STAYS WITH "Rust Admin Menu.exe" AT ALL TIMES OR SPAWNING WILL CEASE TO WORK.
-
-2) To find steam id search the offenders username on steam and copy their community url and paste at http://steamid.co/
+MAKE SURE "item_list.txt" STAYS WITH "Rust Admin Menu.exe" AT ALL TIMES OR SPAWNING WILL CEASE TO WORK.
 
 
 Acknowledgements:
 =========
+BuckeyeMonkey for letting me make changes and call this version of the script my own.
 
-Special thanks to:
+twiz_, iSkilz, tlm from the AutoHotKey Community IRC for their help in finding problems in the new script.
 
-Proxywars
-
-Krevan88
 
 For their work on updating and improving this script!!
