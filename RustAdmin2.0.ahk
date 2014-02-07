@@ -9,7 +9,7 @@
 
 #NoEnv
 #SingleInstance force
-#IfWinActive, PlayRust
+;#IfWinActive, PlayRust
 
 ItemPlayer = Krevan
 TeleportPlayer = Krevan
@@ -235,7 +235,7 @@ MsgBox,0,This functionality is currently in progress., I am currently working on
 	Gui,7: Add, Radio, x266 y7 w80 h20 , All Players
 	XPOSMOD := 0
 	YPOSMOD := 1.5
-	Loop, read, %AHKFiles%item_list.txt
+	Loop, read, %A_WorkingDir%\item_list.txt
 	{
 		StringSplit, param_array, A_LoopReadLine, %A_Tab%
 		YPOS := (YPOSMOD * 25) + 10
