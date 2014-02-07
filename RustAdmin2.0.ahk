@@ -3,9 +3,6 @@
 ; **	Original Concept by [ABSO]BuckeyeMonkey             **
 ; ** 	https://github.com/buckeyemonkey/RustAdmin	        **
 ; ************************************************************
-;
-;;; Version 0.1.0
-;
 
 #NoEnv
 #SingleInstance force
@@ -165,7 +162,6 @@ return
 
 ; Spawning Items Menu
 SpawnItems:
-MsgBox,0,This functionality is currently in progress., I am currently working on a new way to impliment this functionality. The window and the options are all on this page, but as of right now none of this window is working. Sorry. -Krevan
 	global Items1_1,Items2_1,Items3_1,Items4_1,Items5_1,Items6_1,Items7_1,Items8_1,Items9_1,Items10_1
 	global Items1_2,Items2_2,Items3_2,Items4_2,Items5_2,Items6_2,Items7_2,Items8_2,Items9_2,Items10_2
 	global Items11_1,Items12_1,Items13_1,Items14_1,Items15_1,Items16_1,Items17_1,Items18_1,Items19_1,Items20_1
@@ -226,6 +222,7 @@ MsgBox,0,This functionality is currently in progress., I am currently working on
 	global Items281_2,Items282_2,Items283_2,Items284_2,Items285_2,Items286_2,Items287_2,Items288_2,Items289_2,Items290_2
 	global Items291_1,Items292_1,Items293_1,Items294_1,Items295_1,Items296_1,Items297_1,Items298_1,Items299_1,Items300_1
 	global Items291_2,Items292_2,Items293_2,Items294_2,Items295_2,Items296_2,Items297_2,Items298_2,Items299_2,Items300_2
+	
 	global ItemPlayer
 	
 	Gui,7: +AlwaysOnTop +ToolWindow +Owner ; +Owner avoids a taskbar button.
@@ -322,7 +319,7 @@ return
 	Gui,7:Submit
 	Gui,7:Destroy
 	
-	Loop, read, %AHKFiles%\item_list.txt
+	Loop, read, %A_ScriptDir%\item_list.txt
 	{
 		StringSplit, param_array, A_LoopReadLine, %A_Tab% 
 		if (Items%A_Index%_1 = 1) {
