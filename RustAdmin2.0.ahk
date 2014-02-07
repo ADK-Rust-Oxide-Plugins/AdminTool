@@ -9,15 +9,18 @@
 
 #NoEnv
 #SingleInstance force
-;#IfWinActive, PlayRust
+#IfWinActive, PlayRust
 
+ItemPlayer = Krevan
 TeleportPlayer = Krevan
 TeleportToPlayer = BuckeyeMonkey
 TeleportX := 909
 TeleportY := 359
 TeleportZ := 735
-Banid = STEAM_0:1:12345678
-Username = Hacker Name
+Kick = Player Name
+Ban = Player Name
+BanID = STEAM_0:1:12345678
+HackerName = Hacker Name
 Reason = Hacking and Spamming
 Say = Server will be restarting within a few minutes
 Time = 12
@@ -41,9 +44,9 @@ F12::
     ExitApp
 return
 
+ShowMainMenu() {
 ; MainMenu
-	Gui,Main: +AlwaysOnTop +ToolWindow +Owner ; +Owner avoids a taskbar button
-	Gui,Main: Add, Button, x6 y7 w100 h30 gLogin , &Admin Login
+	Gui,Main: Add, Button, x6 y7 w100 h30 gLogin, &Admin Login
 	Gui,Main: Add, Button, x106 y7 w100 h30 gLoadout , Admin &Loadout
 	Gui,Main: Add, Button, x206 y7 w100 h30 gGodMode , &God Mode
 	Gui,Main: Add, Button, x6 y37 w100 h30 gNotice , Server &Notice
@@ -55,8 +58,9 @@ return
 	Gui,Main: Add, Button, x6 y97 w100 h30 gKick , Player &Kick
 	Gui,Main: Add, Button, x106 y97 w100 h30 gBan , Player &Ban
 	Gui,Main: Add, Button, x206 y97 w100 h30 gSteamID , SteamI&D Ban
-	Gui,Main: Show, NoActivate, Rust Admin Script Menu
+	Gui,Main: Show, w310 h130 , Krevan's Rust Admin Script Menu
 return
+}
 
 ; Login Window
 Login:
@@ -65,7 +69,7 @@ global Password
 	Gui,2: Add, Text,, Admin Password: 
 	Gui,2: Add, Edit, vPassword ym,%Password%
 	Gui,2: Add, Button, default xm, OK
-	Gui,2: Show, NoActivate, RustAdmin RCON Login
+	Gui,2: Show, , RustAdmin RCON Login
 return
 
 2ButtonOK:
@@ -81,6 +85,29 @@ return
 
 ; Admin Loadout
 Loadout:
+	IfWinNotExist PlayRust
+	Return
+	WinActivate PlayRust
+	WinWaitActive PlayRust
+	Send {F1}
+	sleep 100
+	Send inv.give "Invisible Helmet" "1"
+	sleep 100
+	Send {Enter}
+	Send inv.give "Invisible Vest" "1"
+	sleep 100
+	Send {Enter}
+	Send inv.give "Invisible Pants" "1"
+	sleep 100
+	Send {Enter}
+	Send inv.give "Invisible Boots" "1"
+	sleep 100
+	Send {Enter}
+	Send inv.give "Uber Hatchet" "1"
+	sleep 100
+	Send {Enter}
+	sleep 100
+	Send {F1}
 return
 
 ; God Mode
@@ -91,7 +118,7 @@ GodMode:
 	Gui,4: Add, Radio, vGodModeChoice Checked, On 
 	Gui,4: Add, Radio, , Off 
 	Gui,4: Add, Button, default xm, OK
-	Gui,4: Show, NoActivate, God Mode Toggle
+	Gui,4: Show, , God Mode Toggle
 return
 
 4ButtonOK:
@@ -109,15 +136,36 @@ return
 return
 
 ; Server Popup Announcement
-Notice: 
+Notice:
+	global CustomNotice
+	Gui,5: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
+	Gui,5: Add, Text, x6 y7 w440 h20 +Center, Server Announcement Popup. Some symbols break the command. [! and " are known issues]
+	Gui,5: Add, Edit, x6 y27 w440 h20 vCustomNotice,%CustomNotice%
+	Gui,5: Add, Button, x456 y7 w40 h40, OK
+	Gui,5: Show, , RustAdmin Custom Notice
+return
+
+5ButtonOK:
+	Gui,5:Submit
+	Gui,5:Destroy
+	SendNotice = notice.popupall "%CustomNotice%"
+	ExecuteCommand(SendNotice)
+return
+
+5GuiClose:
+	Gui,5:Destroy
+return
 return
 
 ; Server and Player Status
 Status:
+	SendExecute = status
+	ExecuteCommand(SendExecute)
 return
 
 ; Spawning Items Menu
 SpawnItems:
+MsgBox,0,This functionality is currently in progress., I am currently working on a new way to impliment this functionality. The window and the options are all on this page, but as of right now none of this window is working. Sorry. -Krevan
 	global Items1_1,Items2_1,Items3_1,Items4_1,Items5_1,Items6_1,Items7_1,Items8_1,Items9_1,Items10_1
 	global Items1_2,Items2_2,Items3_2,Items4_2,Items5_2,Items6_2,Items7_2,Items8_2,Items9_2,Items10_2
 	global Items11_1,Items12_1,Items13_1,Items14_1,Items15_1,Items16_1,Items17_1,Items18_1,Items19_1,Items20_1
@@ -178,10 +226,9 @@ SpawnItems:
 	global Items281_2,Items282_2,Items283_2,Items284_2,Items285_2,Items286_2,Items287_2,Items288_2,Items289_2,Items290_2
 	global Items291_1,Items292_1,Items293_1,Items294_1,Items295_1,Items296_1,Items297_1,Items298_1,Items299_1,Items300_1
 	global Items291_2,Items292_2,Items293_2,Items294_2,Items295_2,Items296_2,Items297_2,Items298_2,Items299_2,Items300_2
-
 	global ItemPlayer
 	
-	Gui,7: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
+	Gui,7: +AlwaysOnTop +ToolWindow +Owner ; +Owner avoids a taskbar button.
 	Gui,7: Add, Text, x6 y7 w40 h20 , Player:
 	Gui,7: Add, Edit, x46 y7 w120 h20 vItemPlayer, %ItemPlayer%
 	Gui,7: Add, Radio, x176 y7 w80 h20 vPlayerChoice Checked, Individual
@@ -206,7 +253,7 @@ SpawnItems:
 		}
 	}
 	Gui,7: Add, Button, x356 y7 w430 h20 , OK
-	Gui,7: Show, NoActivate, RustAdmin Create Items
+	Gui,7: Show, , Rust Admin Item Spawning Menu
 return
 
 7ButtonOK:
@@ -295,6 +342,32 @@ return
 
 ; Supply AirDrop
 Supply:
+	global Airdrop
+	Gui,8: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
+	Gui,8: Add, Text,, Airdrop:
+	Gui,8: Add, Edit, vAirdrop ym,%Airdrop%
+	Gui,8: Add, Button, default xm, OK
+	Gui,8: Show, , Airdrop Count
+return
+
+8ButtonOK:
+	Gui,8:Submit
+	Gui,8:Destroy
+	AirdropCommand = airdrop.drop
+	Airdrop:= Airdrop - 1
+	Loop
+	{
+	ExecuteCommand(AirdropCommand)
+	if a_index > %Airdrop%
+        break  ; Terminate the loop
+    if a_index < %Airdrop%
+        continue ; Skip the below and start a new iteration
+	}
+
+return
+
+8GuiClose:
+	Gui,8:Destroy
 return
 
 ; Admin/Player Teleportation
@@ -377,22 +450,109 @@ return
 
 ; Server Time Cycle
 Time:
+	global Time
+	Gui,10: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
+	Gui,10: Add, Text,, What Time Would You Like? (0-24)
+	Gui,10: Add, Edit, vTime ym,%Time%
+	Gui,10: Add, Button, default xm, OK
+	Gui,10: Show, NoActivate, RustAdmin Time Options
+return
+
+10ButtonOK:
+	Gui,10:Submit
+	Gui,10:Destroy
+	SendTime = env.time "%Time%"
+	ExecuteCommand(SendTime)
+return
+
+10GuiClose:
+	Gui,10:Destroy
 return
 
 ; Player Kick
 Kick:
+	global Kick,Reason
+	Gui,11: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
+	Gui,11: Add, Text,, Kick:
+	Gui,11: Add, Edit, vKick ym,%Kick%
+	Gui,11: Add, Text,, Reason:
+	Gui,11: Add, Edit, vReason,%Reason%
+	Gui,11: Add, Button, default xm, OK
+	Gui,11: Show, NoActivate, Kick Menu
+return
+
+11ButtonOK:
+	Gui,11:Submit
+	Gui,11:Destroy
+	KickCommand = kick "%Kick%" "%Reason%"
+	ExecuteCommand(KickCommand)
+return
+
+11GuiClose:
+	Gui,11:Destroy
+return
 return
 
 ; Player Ban
 Ban:
+	global Ban,Reason
+	Gui,12: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
+	Gui,12: Add, Text,, Ban:
+	Gui,12: Add, Edit, vBan ym,%Ban%
+	Gui,12: Add, Text,, Reason:
+	Gui,12: Add, Edit, vReason,%Reason%
+	Gui,12: Add, Button, default xm, OK
+	Gui,12: Show, NoActivate, Ban Menu
+return
+
+12ButtonOK:
+	Gui,12:Submit
+	Gui,12:Destroy
+	BanCommand = ban "%Ban%"
+	KickCommand = kick "%Ban%" "%Reason%"
+	ExecuteCommand(BanCommand)
+	ExecuteCommand(KickCommand)
+return
+
+12GuiClose:
+	Gui,12:Destroy
 return
 
 ; SteamID Ban
 SteamID:
+	global BanID
+	global HackerName
+	global Reason
+	Gui,13: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
+	Gui,13: Add, Text,, Steam ID:
+	Gui,13: Add, Edit, vBanid ym,%BanID%
+	Gui,13: Add, Text, X10 Y35, Username:
+	Gui,13: Add, Edit, vUsername X68 Y35,%HackerName%
+	Gui,13: Add, Text,, Reason:
+	Gui,13: Add, Edit, vReason,%Reason%
+	Gui,13: Add, Button, default xm, OK
+	Gui,13: Show, NoActivate, Steam Ban
+return
+
+13ButtonOK:
+	Gui,13:Submit
+	Gui,13:Destroy
+	BanidCommand = banid "%BanID%"
+	KickCommand = kick "%HackerName%" "%Reason%"
+	ExecuteCommand(BanidCommand)
+	ExecuteCommand(KickCommand)
+return
+
+13GuiClose:
+	Gui,13:Destroy
 return
 
 ; Execute All Commands Script
 ExecuteCommand(command) {
+	IfWinNotExist PlayRust
+	Return
+	WinActivate PlayRust
+	WinWaitActive PlayRust
 	Send {F1}
 	Sleep 100
 	Send %command%
