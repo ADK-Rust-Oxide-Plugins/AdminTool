@@ -4,11 +4,27 @@
 ; ** 	https://github.com/buckeyemonkey/RustAdmin	        **
 ; ************************************************************
 ;
-;;; Version a0.1.0
+;;; Button Version a0.1.0
 ;
 
 #NoEnv
 #SingleInstance force
+
+TeleportPlayer = Krevan
+TeleportX := 909
+TeleportY := 359
+TeleportZ := 735
+Banid = STEAM_0:1:12345678
+Username = Hacker Name
+Reason = Hacking and Spamming
+Say = Server will be restarting within a few minutes
+Time = 12
+
+XCenter := A_ScreenWidth/2
+YCenter := A_ScreenHeight/2
+
+Delay = 5000
+Stop = Yes
 
 MsgBox,0,Krevan's Rust Admin Tool, Shortcut Keys:`n=========`n`nF2: Main Menu`nF12: Close Script
 
