@@ -10,7 +10,7 @@
 #NoEnv
 #SingleInstance force
 
-; MsgBox,0,Shortcut Keys:`nF2: Main Menu`nF12: Close Script
+MsgBox,0,Krevan's Rust Admin Tool, Shortcut Keys:`n=========`n`nF2: Main Menu`nF12: Close Script
 
 ; Shortcut Keys
 F2::
