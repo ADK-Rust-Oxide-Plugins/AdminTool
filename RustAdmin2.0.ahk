@@ -27,12 +27,12 @@ return
 ShowMainMenu() {
 	Gui,Main: +AlwaysOnTop +ToolWindow +Owner ; +Owner avoids a taskbar button
 	Gui,Main: Add, Button, x6 y7 w100 h30 gLogin , &Admin Login
-	Gui,Main: Add, Text, Center x106 y7 w100 h30 gLoadout , Admin &Loadout
+	Gui,Main: Add, Button, x106 y7 w100 h30 gLoadout , Admin &Loadout
 	Gui,Main: Add, Button, x206 y7 w100 h30 gGodMode , &God Mode
 	Gui,Main: Add, Button, x6 y37 w100 h30 gNotice , Server &Notice
-	Gui,Main: Add, Text, Center x106 y37 w100 h30 gStatus , Server &Status
+	Gui,Main: Add, Button, x106 y37 w100 h30 gStatus , Server &Status
 	Gui,Main: Add, Button, x206 y37 w100 h30 gSpawnItems , Spawn &Items
-	Gui,Main: Add, Text, Center x6 y67 w100 h30 gSupply , Supply &Drop
+	Gui,Main: Add, Button, x6 y67 w100 h30 gSupply , Supply &Drop
 	Gui,Main: Add, Button, x106 y67 w100 h30 gTeleport , &Teleporting
 	Gui,Main: Add, Button, x206 y67 w100 h30 gTime , Time &Cycle
 	Gui,Main: Add, Button, x6 y97 w100 h30 gKick , Player &Kick
