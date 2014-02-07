@@ -4,7 +4,9 @@
 ; ** 	https://github.com/buckeyemonkey/RustAdmin	        **
 ; ************************************************************
 
-URLDownloadToFile, *0 https://www.dropbox.com/s/jj29apzi2qli5at/RustLogo.png, %A_WorkingDir%\RustLogo.png
+; Image for the Main Menu
+URLDownloadToFile, *0 https://www.dropbox.com/s/jj29apzi2qli5at/RustLogo.png, %A_WorkingDir%\RAT_Logo.png
+; Required .txt file for Item Spawning Menu
 URLDownloadToFile, *0 https://github.com/krevan88/AdminTool/blob/master/item_list.txt, %A_WorkingDir%\item_list.txt
 
 #NoEnv
@@ -64,7 +66,7 @@ ShowMainMenu() {
 	Gui,Main: +LastFound
 	Gui1 := WinExist()
 	Gui,Main: Menu, MenuBar
-	Gui,Main: Add, Picture, x10 y5 w300 h100 , %A_WorkingDir%\RustLogo.png
+	Gui,Main: Add, Picture, x10 y5 w300 h100 , %A_WorkingDir%\RAT_Logo.png
 	Gui,Main: Add, Text, x8 y107 w304 h1 0x7  ;Horizontal Line > Black
 	Gui,Main: Add, Button, x10 y110 w100 h30 gLogin, &Admin Login
 	Gui,Main: Add, Button, x110 y110 w100 h30 gLoadout , Admin &Loadout
