@@ -1,24 +1,24 @@
-556 Ammo	
-556 Ammo Blueprint	
-9mm Ammo	
-9mm Ammo Blueprint	
-9mm Pistol	
-9mm Pistol Blueprint	
-Animal Fat	
-Anti-Radiation Pills	
-Arrow	
-Arrow Blueprint	
-Bandage	
-Bandage Blueprint	
-Bed	
-Bed Blueprint	
-Blood	
-Blood Draw Kit	
-Blood Draw Kit Blueprint	
-Bolt Action Rifle	
-Bolt Action Rifle Blueprint	
-Camp Fire	
-Camp Fire Blueprint	
+556 Ammo
+556 Ammo Blueprint
+9mm Ammo
+9mm Ammo Blueprint
+9mm Pistol
+9mm Pistol Blueprint
+Animal Fat
+Anti-Radiation Pills
+Arrow
+Arrow Blueprint
+Bandage
+Bandage Blueprint
+Bed
+Bed Blueprint
+Blood
+Blood Draw Kit
+Blood Draw Kit Blueprint
+Bolt Action Rifle
+Bolt Action Rifle Blueprint
+Camp Fire
+Camp Fire Blueprint
 Can of Beans
 Can of Tuna
 Charcoal
