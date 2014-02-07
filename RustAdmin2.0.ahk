@@ -47,31 +47,32 @@ ShowMainMenu() {
 	Menu, FileMenu, Add, &Open Rust `t Ctrl+O, MenuOpenRust  ; See remarks below about Ctrl+O.
 	Menu, FileMenu, Add ; separator
 	Menu, FileMenu, Add, E&xit, GuiClose
-	Menu, OptionsMenu, Add, &PlayRust.com `t Ctrl+R, PlayRust
-	Menu, OptionsMenu, Add, Rust &Trello, Trello
-	Menu, OptionsMenu, Add, &RustOxide.com, RustOxide
+	Menu, RustMenu, Add, &PlayRust.com `t Ctrl+R, PlayRust
+	Menu, RustMenu, Add, Rust &Trello, Trello
+	Menu, RustMenu, Add, &RustOxide.com, RustOxide
 	Menu, HelpMenu, Add, &About Script, About
 	Menu, HelpMenu, Add, &Krevan's Twitter, Krevan
 	Menu, MenuBar, Add, &File, :FileMenu
-	Menu, MenuBar, Add, &Options, :OptionsMenu
+	Menu, MenuBar, Add, &Rust Related, :RustMenu
 	Menu, MenuBar, Add, &Help, :HelpMenu
 	Menu, Tray, Add, Restore Window, GuiShow
 	Menu, Tray, Default, Restore Window
 	Gui,Main: +LastFound
 	Gui1 := WinExist()
 	Gui,Main: Menu, MenuBar
-	Gui,Main: Add, Button, x10 y10 w100 h30 gLogin, &Admin Login
-	Gui,Main: Add, Button, x110 y10 w100 h30 gLoadout , Admin &Loadout
-	Gui,Main: Add, Button, x210 y10 w100 h30 gGodMode , &God Mode
-	Gui,Main: Add, Button, x10 y40 w100 h30 gNotice , Server &Notice
-	Gui,Main: Add, Button, x110 y40 w100 h30 gStatus , Server &Status
-	Gui,Main: Add, Button, x210 y40 w100 h30 gSpawnItems , Spawn &Items
-	Gui,Main: Add, Button, x10 y70 w100 h30 gSupply , Supply &Drop
-	Gui,Main: Add, Button, x110 y70 w100 h30 gTeleport , &Teleporting
-	Gui,Main: Add, Button, x210 y70 w100 h30 gTime , Time &Cycle
-	Gui,Main: Add, Button, x10 y100 w100 h30 gKick , Player &Kick
-	Gui,Main: Add, Button, x110 y100 w100 h30 gBan , Player &Ban
-	Gui,Main: Add, Button, x210 y100 w100 h30 gSteamID , SteamI&D Ban
+	Gui,Main: Add, Picture, x10 y0 w300 h100 , %A_ScriptDir%\media\RustLogo.png
+	Gui,Main: Add, Button, x10 y105 w100 h30 gLogin, &Admin Login
+	Gui,Main: Add, Button, x110 y105 w100 h30 gLoadout , Admin &Loadout
+	Gui,Main: Add, Button, x210 y105 w100 h30 gGodMode , &God Mode
+	Gui,Main: Add, Button, x10 y135 w100 h30 gNotice , Server &Notice
+	Gui,Main: Add, Button, x110 y135 w100 h30 gStatus , Server &Status
+	Gui,Main: Add, Button, x210 y135 w100 h30 gSpawnItems , Spawn &Items
+	Gui,Main: Add, Button, x10 y165 w100 h30 gSupply , Supply &Drop
+	Gui,Main: Add, Button, x110 y165 w100 h30 gTeleport , &Teleporting
+	Gui,Main: Add, Button, x210 y165 w100 h30 gTime , Time &Cycle
+	Gui,Main: Add, Button, x10 y195 w100 h30 gKick , Player &Kick
+	Gui,Main: Add, Button, x110 y195 w100 h30 gBan , Player &Ban
+	Gui,Main: Add, Button, x210 y195 w100 h30 gSteamID , SteamI&D Ban
 	Gui,Main: Show, , Krevan's Rust Admin Script Menu
 return
 }
