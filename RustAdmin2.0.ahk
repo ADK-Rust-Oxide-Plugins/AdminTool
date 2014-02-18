@@ -19,7 +19,7 @@
 #NoEnv
 #SingleInstance force
 
-; MsgBox,, Krevan's Admin Tool, Thank you for downloading this admin tool. I have made a lot of changes in this version, and welcome you to explore and give your suggestions and opinions on the tool as it is right now.
+MsgBox,, Krevan's Admin Tool, Thank you for downloading this admin tool. I have made a lot of changes in this version, and welcome you to explore and give your suggestions and opinions on the tool as it is right now.`n`nPlease take the time to read the information contained in the help menu.`n`nF2 - Open Menu`nF12 - Exit Application
 
 Airdrop = How Many Airdrops Do You Want?
 Password = InputPasswordHere
@@ -33,7 +33,7 @@ Kick = Player Name
 Ban = Player Name
 BanID = STEAM_0:1:12345678
 HackerName = Hacker Name
-Reason = Hacking and Spamming
+Reason = Being A Noob
 ServerNotice = Server will be restarting within a few minutes.
 Time = 12
 
@@ -144,14 +144,19 @@ Download:
 FileCreateDir, %A_WorkingDir%\Resources\
 ; Image for the Main Menu
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/RustLogo.png, %A_WorkingDir%\Resources\RustLogo.png
-; Required .txt file(s) for Item Spawning Menu(s)
+; Delete Old List Files.
+FileDelete, %A_WorkingDir%\Resources\item_list.txt
+FileDelete, %A_WorkingDir%\Resources\building_list.txt
+FileDelete, %A_WorkingDir%\Resources\clothing_list.txt
+FileDelete, %A_WorkingDir%\Resources\food_list.txt
+FileDelete, %A_WorkingDir%\Resources\misc_list.txt
+FileDelete, %A_WorkingDir%\Resources\weapon_list.txt
+; Download Up-To Date List Files.
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/building_list.txt, %A_WorkingDir%\Resources\building_list.txt
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/clothing_list.txt, %A_WorkingDir%\Resources\clothing_list.txt
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/food_list.txt, %A_WorkingDir%\Resources\food_list.txt
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/misc_list.txt, %A_WorkingDir%\Resources\misc_list.txt
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/weapon_list.txt, %A_WorkingDir%\Resources\weapon_list.txt
-; Delete Old item_list.txt file.
-FileDelete, %A_WorkingDir%\Resources\item_list.txt
  
 GuiShow:
  Gui, Show ; Retores the GUI
@@ -343,7 +348,7 @@ BuildList:
 	global Items291_2,Items292_2,Items293_2,Items294_2,Items295_2,Items296_2,Items297_2,Items298_2,Items299_2,Items300_2
 	global ItemPlayer
 	
-	Gui,15: +Resize +AlwaysOnTop ; +Owner avoids a taskbar button.
+	Gui,15: +AlwaysOnTop ; +Owner avoids a taskbar button.
 	Gui,15: Add, Text, x6 y7 w40 h20 , Player:
 	Gui,15: Add, Edit, x46 y7 w120 h20 vItemPlayer, %ItemPlayer%
 	Gui,15: Add, Radio, x176 y7 w80 h20 vPlayerChoice Checked, Individual
@@ -359,7 +364,7 @@ BuildList:
 		XPOSNUM := 175 + (XPOSMOD * 200)
 		Gui,15: Add, Checkbox, vItems%A_Index%_1 X%XPOS% Y%YPOS%, %param_array1%
 		Gui,15: Add, Edit, w27 h20 vItems%A_Index%_2 X%XPOSNUM% Y%YPOSNUM%, %param_array2%
-		if (Mod(A_Index,25) = 0) {
+		if (Mod(A_Index,15) = 0) {
 			XPOSMOD := XPOSMOD + 1
 			YPOSMOD := 1.25
 		}
@@ -518,7 +523,7 @@ ClothList:
 	global Items291_2,Items292_2,Items293_2,Items294_2,Items295_2,Items296_2,Items297_2,Items298_2,Items299_2,Items300_2
 	global ItemPlayer
 	
-	Gui,16: +Resize +AlwaysOnTop ; +Owner avoids a taskbar button.
+	Gui,16: +AlwaysOnTop ; +Owner avoids a taskbar button.
 	Gui,16: Add, Text, x6 y7 w40 h20 , Player:
 	Gui,16: Add, Edit, x46 y7 w120 h20 vItemPlayer, %ItemPlayer%
 	Gui,16: Add, Radio, x176 y7 w80 h20 vPlayerChoice Checked, Individual
@@ -534,7 +539,7 @@ ClothList:
 		XPOSNUM := 175 + (XPOSMOD * 200)
 		Gui,16: Add, Checkbox, vItems%A_Index%_1 X%XPOS% Y%YPOS%, %param_array1%
 		Gui,16: Add, Edit, w27 h20 vItems%A_Index%_2 X%XPOSNUM% Y%YPOSNUM%, %param_array2%
-		if (Mod(A_Index,20) = 0) {
+		if (Mod(A_Index,15) = 0) {
 			XPOSMOD := XPOSMOD + 1
 			YPOSMOD := 1.25
 		}
@@ -693,7 +698,7 @@ FoodList:
 	global Items291_2,Items292_2,Items293_2,Items294_2,Items295_2,Items296_2,Items297_2,Items298_2,Items299_2,Items300_2
 	global ItemPlayer
 	
-	Gui,17: +Resize +AlwaysOnTop ; +Owner avoids a taskbar button.
+	Gui,17: +AlwaysOnTop ; +Owner avoids a taskbar button.
 	Gui,17: Add, Text, x6 y7 w40 h20 , Player:
 	Gui,17: Add, Edit, x46 y7 w120 h20 vItemPlayer, %ItemPlayer%
 	Gui,17: Add, Radio, x176 y7 w80 h20 vPlayerChoice Checked, Individual
@@ -709,7 +714,7 @@ FoodList:
 		XPOSNUM := 175 + (XPOSMOD * 200)
 		Gui,17: Add, Checkbox, vItems%A_Index%_1 X%XPOS% Y%YPOS%, %param_array1%
 		Gui,17: Add, Edit, w27 h20 vItems%A_Index%_2 X%XPOSNUM% Y%YPOSNUM%, %param_array2%
-		if (Mod(A_Index,25) = 0) {
+		if (Mod(A_Index,3) = 0) {
 			XPOSMOD := XPOSMOD + 1
 			YPOSMOD := 1.25
 		}
@@ -868,7 +873,7 @@ MiscList:
 	global Items291_2,Items292_2,Items293_2,Items294_2,Items295_2,Items296_2,Items297_2,Items298_2,Items299_2,Items300_2
 	global ItemPlayer
 	
-	Gui,18: +Resize +AlwaysOnTop ; +Owner avoids a taskbar button.
+	Gui,18: +AlwaysOnTop ; +Owner avoids a taskbar button.
 	Gui,18: Add, Text, x6 y7 w40 h20 , Player:
 	Gui,18: Add, Edit, x46 y7 w120 h20 vItemPlayer, %ItemPlayer%
 	Gui,18: Add, Radio, x176 y7 w80 h20 vPlayerChoice Checked, Individual
@@ -884,7 +889,7 @@ MiscList:
 		XPOSNUM := 175 + (XPOSMOD * 200)
 		Gui,18: Add, Checkbox, vItems%A_Index%_1 X%XPOS% Y%YPOS%, %param_array1%
 		Gui,18: Add, Edit, w27 h20 vItems%A_Index%_2 X%XPOSNUM% Y%YPOSNUM%, %param_array2%
-		if (Mod(A_Index,25) = 0) {
+		if (Mod(A_Index,15) = 0) {
 			XPOSMOD := XPOSMOD + 1
 			YPOSMOD := 1.25
 		}
@@ -1043,7 +1048,7 @@ WeaponList:
 	global Items291_2,Items292_2,Items293_2,Items294_2,Items295_2,Items296_2,Items297_2,Items298_2,Items299_2,Items300_2
 	global ItemPlayer
 	
-	Gui,19: +Resize +AlwaysOnTop ; +Owner avoids a taskbar button.
+	Gui,19: +AlwaysOnTop ; +Owner avoids a taskbar button.
 	Gui,19: Add, Text, x6 y7 w40 h20 , Player:
 	Gui,19: Add, Edit, x46 y7 w120 h20 vItemPlayer, %ItemPlayer%
 	Gui,19: Add, Radio, x176 y7 w80 h20 vPlayerChoice Checked, Individual
@@ -1059,7 +1064,7 @@ WeaponList:
 		XPOSNUM := 175 + (XPOSMOD * 200)
 		Gui,19: Add, Checkbox, vItems%A_Index%_1 X%XPOS% Y%YPOS%, %param_array1%
 		Gui,19: Add, Edit, w27 h20 vItems%A_Index%_2 X%XPOSNUM% Y%YPOSNUM%, %param_array2%
-		if (Mod(A_Index,25) = 0) {
+		if (Mod(A_Index,15) = 0) {
 			XPOSMOD := XPOSMOD + 1
 			YPOSMOD := 1.25
 		}

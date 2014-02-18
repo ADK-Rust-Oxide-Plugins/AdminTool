@@ -1,4 +1,4 @@
-Cloth 250
+Cloth	250
 Leather	250
 Cloth Boots	1
 Cloth Boots BP	1
