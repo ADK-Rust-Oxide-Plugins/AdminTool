@@ -1,0 +1,38 @@
+Cloth 250
+Leather	250
+Cloth Boots	1
+Cloth Boots BP	1
+Cloth Helmet	1
+Cloth Helmet BP	1
+Cloth Pants	1
+Cloth Pants BP	1
+Cloth Vest	1
+Cloth Vest BP	1
+Invisible Boots	1
+Invisible Helmet	1
+Invisible Pants	1
+Invisible Vest	1
+Kevlar Boots	1
+Kevlar Boots BP	1
+Kevlar Helmet	1
+Kevlar Helmet BP	1
+Kevlar Pants	1
+Kevlar Pants BP	1
+Kevlar Vest	1
+Kevlar Vest BP	1
+Leather Boots	1
+Leather Boots BP	1
+Leather Helmet	1
+Leather Helmet BP	1
+Leather Pants	1
+Leather Pants BP	1
+Leather Vest	1
+Leather Vest BP	1
+Rad Suit Boots	1
+Rad Suit Boots BP	1
+Rad Suit Helmet	1
+Rad Suit Helmet BP	1
+Rad Suit Pants	1
+Rad Suit Pants BP	1
+Rad Suit Vest	1
+Rad Suit Vest BP	1

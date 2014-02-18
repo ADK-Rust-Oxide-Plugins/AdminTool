@@ -8,16 +8,18 @@
 ; 	Future Plans
 ; =================
 ; Multiple Spawning Windows for Different Types of Items.
-; - Weapons
-; - Gear/Armor
-; - Buildings (Possibly Different Windows per type of building.
-; - Food Stuff
+; - [ ] Weapons
+; - [ ] Gear/Armor
+; - [ ] Buildings (Possibly Different Windows per type of building.
+; - [ ] Food Stuff
 ; 
 ; 
 ; 
 
 #NoEnv
 #SingleInstance force
+
+; MsgBox,, Krevan's Admin Tool, Thank you for downloading this admin tool. I have made a lot of changes in this version, and welcome you to explore and give your suggestions and opinions on the tool as it is right now.
 
 Airdrop = How Many Airdrops Do You Want?
 Password = InputPasswordHere
@@ -54,7 +56,7 @@ return
 
 ShowMainMenu() {
 ; MainMenuMenu 
-	Menu, FileMenu, Add, Run Rust `t Ctrl+O, MenuOpenRust  ; See remarks below about Ctrl+O.
+	Menu, FileMenu, Add, Run Rust `t Ctrl+O, MenuOpenRust
 	Menu, FileMenu, Add, Exit, GuiClose
 	Menu, RustMenu, Add, PlayRust.com `t Ctrl+R, PlayRust
 	Menu, RustMenu, Add, Rust Trello, Trello
@@ -71,20 +73,21 @@ ShowMainMenu() {
 	Gui,Main: +LastFound
 	Gui1 := WinExist()
 	Gui,Main: Menu, MenuBar
-	Gui,Main: Add, Picture, x10 y5 w300 h100 , %A_WorkingDir%\RustLogo.png
+	Gui,Main: Add, Picture, x10 y5 w300 h100 , %A_WorkingDir%\Resources\RustLogo.png
 	Gui,Main: Add, Text, x8 y107 w304 h1 0x7  ;Horizontal Line > Black
-	Gui,Main: Add, Button, x10 y110 w100 h30 gLogin, &Admin Login
-	Gui,Main: Add, Button, x110 y110 w100 h30 gLoadout , Admin &Loadout
-	Gui,Main: Add, Button, x210 y110 w100 h30 gGodMode , &God Mode
-	Gui,Main: Add, Button, x10 y140 w100 h30 gNotice , Server &Notice
-	Gui,Main: Add, Button, x110 y140 w100 h30 gStatus , Server &Status
-	Gui,Main: Add, Button, x210 y140 w100 h30 gSpawnItems , Spawn &Items
-	Gui,Main: Add, Button, x10 y170 w100 h30 gSupply , Supply &Drop
-	Gui,Main: Add, Button, x110 y170 w100 h30 gTeleport , &Teleporting
-	Gui,Main: Add, Button, x210 y170 w100 h30 gTime , Time &Cycle
-	Gui,Main: Add, Button, x10 y200 w100 h30 gKick , Player &Kick
-	Gui,Main: Add, Button, x110 y200 w100 h30 gBan , Player &Ban
-	Gui,Main: Add, Button, x210 y200 w100 h30 gSteamID , SteamI&D Ban
+	Gui,Main: Add, Button, x10 y110 w100 h30 gLogin, Admin Login
+	Gui,Main: Add, Button, x110 y110 w100 h30 gLoadout , Admin Loadout
+	Gui,Main: Add, Button, x210 y110 w100 h30 gGodMode , God Mode
+	Gui,Main: Add, Button, x10 y140 w100 h30 gNotice , Server Notice
+	Gui,Main: Add, Button, x110 y140 w100 h30 gStatus , Server Status
+	Gui,Main: Add, Button, x210 y140 w100 h30 gSpawnItems , Spawn Items
+	Gui,Main: Add, Button, x10 y170 w100 h30 gSupply , Supply Drop
+	Gui,Main: Add, Button, x110 y170 w100 h30 gTeleport , Teleporting
+	Gui,Main: Add, Button, x210 y170 w100 h30 gTime , Time Cycle
+	Gui,Main: Add, Button, x10 y200 w100 h30 gKick , Player Kick
+	Gui,Main: Add, Button, x110 y200 w100 h30 gBan , Player Ban
+	Gui,Main: Add, Button, x210 y200 w100 h30 gSteamID , SteamID Ban
+	Gui,Main: Add, Button, x110 y250 w100 h30 gSpawnMenu , Spawn Menu
 	Gui,Main: Show, , Krevan's Rust Admin Tool
 return
 }
@@ -138,10 +141,17 @@ Run, http://www.twitter.com/krevan88
 return
 
 Download:
+; Creation of Storage Directory
+FileCreateDir, %A_WorkingDir%\Resources\
 ; Image for the Main Menu
-URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/RustLogo.png, %A_WorkingDir%\RustLogo.png
-; Required .txt file for Item Spawning Menu
-URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/item_list.txt, %A_WorkingDir%\item_list.txt
+URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/RustLogo.png, %A_WorkingDir%\Resources\RustLogo.png
+; Required .txt file(s) for Item Spawning Menu(s)
+URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/item_list.txt, %A_WorkingDir%\Resources\item_list.txt
+URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/building_list.txt, %A_WorkingDir%\Resources\building_list.txt
+URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/clothing_list.txt, %A_WorkingDir%\Resources\clothing_list.txt
+URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/food_list.txt, %A_WorkingDir%\Resources\food_list.txt
+URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/misc_list.txt, %A_WorkingDir%\Resources\misc_list.txt
+URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/weapon_list.txt, %A_WorkingDir%\Resources\weapon_list.txt
  
 GuiShow:
  Gui, Show ; Retores the GUI
@@ -159,7 +169,7 @@ Return
  
 ; Menu Bar End ******************************************************
 
-; Login Window
+; Login Window ======================================================
 Login:
 global Password
 	Gui,2: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
@@ -180,7 +190,7 @@ return
 	Gui,2:Destroy
 return
 
-; Admin Loadout
+; Admin Loadout ======================================================
 Loadout:
 	IfWinNotExist PlayRust
 	Return
@@ -207,7 +217,7 @@ Loadout:
 	Send {F1}
 return
 
-; God Mode
+; God Mode ======================================================
 GodMode:
 	global GodModeChoice
 	Gui,4: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
@@ -232,7 +242,7 @@ return
 	Gui,4:Destroy
 return
 
-; Server Popup Announcement
+; Server Popup Announcement ======================================================
 Notice:
 	global ServerNotice
 	Gui,5: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
@@ -253,13 +263,13 @@ return
 	Gui,5:Destroy
 return
 
-; Server and Player Status
+; Server and Player Status ======================================================
 Status:
 	SendExecute = status
 	ExecuteCommand(SendExecute)
 return
 
-; Spawning Items Menu
+; Spawning Items Menu ======================================================
 SpawnItems:
 	global Items1_1,Items2_1,Items3_1,Items4_1,Items5_1,Items6_1,Items7_1,Items8_1,Items9_1,Items10_1
 	global Items1_2,Items2_2,Items3_2,Items4_2,Items5_2,Items6_2,Items7_2,Items8_2,Items9_2,Items10_2
@@ -321,7 +331,6 @@ SpawnItems:
 	global Items281_2,Items282_2,Items283_2,Items284_2,Items285_2,Items286_2,Items287_2,Items288_2,Items289_2,Items290_2
 	global Items291_1,Items292_1,Items293_1,Items294_1,Items295_1,Items296_1,Items297_1,Items298_1,Items299_1,Items300_1
 	global Items291_2,Items292_2,Items293_2,Items294_2,Items295_2,Items296_2,Items297_2,Items298_2,Items299_2,Items300_2
-	
 	global ItemPlayer
 	
 	Gui,7: +Resize +AlwaysOnTop ; +Owner avoids a taskbar button.
@@ -331,7 +340,7 @@ SpawnItems:
 	Gui,7: Add, Radio, x266 y7 w80 h20 , All Players
 	XPOSMOD := 0
 	YPOSMOD := 1.25
-	Loop, read, %A_WorkingDir%\item_list.txt
+	Loop, read, %A_WorkingDir%\Resources\item_list.txt
 	{
 		StringSplit, param_array, A_LoopReadLine, %A_Tab%
 		YPOS := (YPOSMOD * 25) + 10
@@ -419,7 +428,7 @@ return
 	Gui,7:Submit
 	Gui,7:Destroy
 	
-	Loop, read, %A_WorkingDir%\item_list.txt
+	Loop, read, %A_WorkingDir%\Resources\item_list.txt
 	{
 		StringSplit, param_array, A_LoopReadLine, %A_Tab% 
 		if (Items%A_Index%_1 = 1) {
@@ -437,7 +446,7 @@ return
 	Gui,7:Destroy
 return
 
-; Supply AirDrop
+; Supply AirDrop ======================================================
 Supply:
 	global Airdrop
 	Gui,8: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
@@ -467,7 +476,7 @@ return
 	Gui,8:Destroy
 return
 
-; Admin/Player Teleportation
+; Admin/Player Teleportation ======================================================
 Teleport:
 	global TeleportChoice,TeleportPlayer,TeleportToPlayer,TeleportX,TeleportY,TeleportZ
 	Gui,9: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
@@ -545,7 +554,7 @@ return
 	Gui,9:Destroy
 return
 
-; Server Time Cycle
+; Server Time Cycle ======================================================
 Time:
 	global Time
 	Gui,10: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
@@ -566,7 +575,7 @@ return
 	Gui,10:Destroy
 return
 
-; Player Kick
+; Player Kick ======================================================
 Kick:
 	global Kick,Reason
 	Gui,11: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
@@ -590,7 +599,7 @@ return
 return
 return
 
-; Player Ban
+; Player Ban ======================================================
 Ban:
 	global Ban,Reason
 	Gui,12: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
@@ -615,12 +624,12 @@ return
 	Gui,12:Destroy
 return
 
-; SteamID Ban
+; SteamID Ban ======================================================
 SteamID:
 	global BanID
 	global HackerName
 	global Reason
-	Gui,13: +AlwaysOnTop +ToolWindow +Owner  ; +Owner avoids a taskbar button.
+	Gui,13: +AlwaysOnTop +ToolWindow +Owner
 	Gui,13: Add, Text, , Steam ID:
 	Gui,13: Add, Edit, vBanid ,%BanID%
 	Gui,13: Add, Text, , Username:
@@ -644,7 +653,101 @@ return
 	Gui,13:Destroy
 return
 
-; Execute All Commands Script
+; Test Window for Separate Spawn Menus ======================================================
+SpawnMenu:
+	Gui,14: +ToolWindow +Owner
+	Gui,14: Add, Button, gBuildList, Building Items
+	Gui,14: Add, Button, , Clothing Items
+	Gui,14: Add, Button, , Food Items
+	Gui,14: Add, Button, , Miscellanious
+	Gui,14: Add, Button, , Weapons/Mods
+	Gui,14: Show, , Spawn Menus
+return
+
+BuildList:
+	global Build1_1,Build2_1,Build3_1,Build4_1,Build5_1,Build6_1,Build7_1,Build8_1,Build9_1,Build10_1
+	global Build1_2,Build2_2,Build3_2,Build4_2,Build5_2,Build6_2,Build7_2,Build8_2,Build9_2,Build10_2
+	global Build11_1,Build12_1,Build13_1,Build14_1,Build15_1,Build16_1,Build17_1,Build18_1,Build19_1,Build20_1
+	global Build11_2,Build12_2,Build13_2,Build14_2,Build15_2,Build16_2,Build17_2,Build18_2,Build19_2,Build20_2
+	global Build21_1,Build22_1,Build23_1,Build24_1,Build25_1,Build26_1,Build27_1,Build28_1,Build29_1,Build30_1
+	global Build21_2,Build22_2,Build23_2,Build24_2,Build25_2,Build26_2,Build27_2,Build28_2,Build29_2,Build30_2
+	global Build31_1,Build32_1,Build33_1,Build34_1,Build35_1,Build36_1,Build37_1,Build38_1,Build39_1,Build40_1
+	global Build31_2,Build32_2,Build33_2,Build34_2,Build35_2,Build36_2,Build37_2,Build38_2,Build39_2,Build40_2
+	global Build41_1,Build42_1,Build43_1,Build44_1,Build45_1,Build46_1,Build47_1,Build48_1,Build49_1,Build50_1
+	global Build41_2,Build42_2,Build43_2,Build44_2,Build45_2,Build46_2,Build47_2,Build48_2,Build49_2,Build50_2
+	global Build51_1,Build52_1,Build53_1,Build54_1,Build55_1,Build56_1,Build57_1,Build58_1,Build59_1,Build60_1
+	global Build51_2,Build52_2,Build53_2,Build54_2,Build55_2,Build56_2,Build57_2,Build58_2,Build59_2,Build60_2
+	global Build61_1,Build62_1,Build63_1,Build64_1,Build65_1,Build66_1,Build67_1,Build68_1,Build69_1,Build70_1
+	global Build61_2,Build62_2,Build63_2,Build64_2,Build65_2,Build66_2,Build67_2,Build68_2,Build69_2,Build70_2
+	global BuildPlayer
+	
+	Gui,Build: +Resize +AlwaysOnTop ; +Owner avoids a taskbar button.
+	Gui,Build: Add, Text, x6 y7 w40 h20 , Player:
+	Gui,Build: Add, Edit, x46 y7 w120 h20 vBuildPlayer, %ItemPlayerBuild%
+	Gui,Build: Add, Radio, x176 y7 w80 h20 vPlayerChoice Checked, Individual
+	Gui,Build: Add, Radio, x266 y7 w80 h20 , All Players
+	XPOSMOD := 0
+	YPOSMOD := 1.25
+	Loop, read, %A_WorkingDir%\Resources\building_list.txt
+	{
+		StringSplit, param_array, A_LoopReadLine, %A_Tab%
+		YPOS := (YPOSMOD * 25) + 10
+		YPOSNUM := (YPOSMOD * 25) + 7
+		XPOS := 10 + (XPOSMOD * 200)
+		XPOSNUM := 175 + (XPOSMOD * 200)
+		Gui,7: Add, Checkbox, vBuild%A_Index%_1 X%XPOS% Y%YPOS%, %param_array1%
+		Gui,7: Add, Edit, w27 h20 vBuild%A_Index%_2 X%XPOSNUM% Y%YPOSNUM%, %param_array2%
+		if (Mod(A_Index,25) = 0) {
+			XPOSMOD := XPOSMOD + 1
+			YPOSMOD := 1.25
+		}
+		else {
+			YPOSMOD := YPOSMOD + 1
+		}
+	}
+	Gui,Build: Add, Button, x356 y7 w200 h20 , OK
+	Gui,Build: Show, , Building Spawning Menu
+return
+
+BuildButtonOK:
+	global Build1_1,Build2_1,Build3_1,Build4_1,Build5_1,Build6_1,Build7_1,Build8_1,Build9_1,Build10_1
+	global Build1_2,Build2_2,Build3_2,Build4_2,Build5_2,Build6_2,Build7_2,Build8_2,Build9_2,Build10_2
+	global Build11_1,Build12_1,Build13_1,Build14_1,Build15_1,Build16_1,Build17_1,Build18_1,Build19_1,Build20_1
+	global Build11_2,Build12_2,Build13_2,Build14_2,Build15_2,Build16_2,Build17_2,Build18_2,Build19_2,Build20_2
+	global Build21_1,Build22_1,Build23_1,Build24_1,Build25_1,Build26_1,Build27_1,Build28_1,Build29_1,Build30_1
+	global Build21_2,Build22_2,Build23_2,Build24_2,Build25_2,Build26_2,Build27_2,Build28_2,Build29_2,Build30_2
+	global Build31_1,Build32_1,Build33_1,Build34_1,Build35_1,Build36_1,Build37_1,Build38_1,Build39_1,Build40_1
+	global Build31_2,Build32_2,Build33_2,Build34_2,Build35_2,Build36_2,Build37_2,Build38_2,Build39_2,Build40_2
+	global Build41_1,Build42_1,Build43_1,Build44_1,Build45_1,Build46_1,Build47_1,Build48_1,Build49_1,Build50_1
+	global Build41_2,Build42_2,Build43_2,Build44_2,Build45_2,Build46_2,Build47_2,Build48_2,Build49_2,Build50_2
+	global Build51_1,Build52_1,Build53_1,Build54_1,Build55_1,Build56_1,Build57_1,Build58_1,Build59_1,Build60_1
+	global Build51_2,Build52_2,Build53_2,Build54_2,Build55_2,Build56_2,Build57_2,Build58_2,Build59_2,Build60_2
+	global Build61_1,Build62_1,Build63_1,Build64_1,Build65_1,Build66_1,Build67_1,Build68_1,Build69_1,Build70_1
+	global Build61_2,Build62_2,Build63_2,Build64_2,Build65_2,Build66_2,Build67_2,Build68_2,Build69_2,Build70_2
+	global BuildPlayer
+	
+	Gui,Build:Submit
+	Gui,Build:Destroy
+	
+	Loop, read, %A_WorkingDir%\Resources\building_list.txt
+	{
+		StringSplit, param_array, A_LoopReadLine, %A_Tab% 
+		if (Build%A_Index%_1 = 1) {
+			Amount = % Build%A_Index%_2
+			GiveCommand = inv.giveplayer "%ItemPlayerBuild%" "%param_array1%" %Amount%
+			if (PlayerChoice == 2) {
+				GiveCommand = inv.giveall "%param_array1%" %Amount%
+			}
+			ExecuteCommand(GiveCommand)
+		}
+	}
+return
+
+BuildGuiClose:
+	Gui,Build:Destroy
+return
+
+; Execute All Commands Script ======================================================
 ExecuteCommand(command) {
 	IfWinNotExist PlayRust
 	Return
