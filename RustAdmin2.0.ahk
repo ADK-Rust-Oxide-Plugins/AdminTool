@@ -3,6 +3,18 @@
 ; **	Original Concept by [ABSO]BuckeyeMonkey             **
 ; ** 	https://github.com/buckeyemonkey/RustAdmin	        **
 ; ************************************************************
+;
+; =================
+; 	Future Plans
+; =================
+; Multiple Spawning Windows for Different Types of Items.
+; - Weapons
+; - Gear/Armor
+; - Buildings (Possibly Different Windows per type of building.
+; - Food Stuff
+; 
+; 
+; 
 
 #NoEnv
 #SingleInstance force
@@ -145,15 +157,6 @@ GuiClose:   ; Triggered by the X button in the top bar
   }
 Return
  
-IsMenuItemChecked( MenuPos, SubMenuPos, hWnd ) { ; By Obi / Lexikos
-;Original version: www.autohotkey.com/forum/viewtopic.php?p=203606#203606
- hMenu :=DllCall("GetMenu", UInt,hWnd )
- hSubMenu := DllCall("GetSubMenu", UInt,hMenu, Int,MenuPos )
- VarSetCapacity(mii, 48, 0), NumPut(48, mii, 0), NumPut(1, mii, 4)
- DllCall( "GetMenuItemInfo", UInt,hSubMenu, UInt,SubMenuPos, Int, 1, UInt,&mii )
-Return ( NumGet(mii, 12) & 0x8 ) ? 1 : 0
-}
-
 ; Menu Bar End ******************************************************
 
 ; Login Window
@@ -321,13 +324,13 @@ SpawnItems:
 	
 	global ItemPlayer
 	
-	Gui,7: +AlwaysOnTop +ToolWindow +Owner ; +Owner avoids a taskbar button.
+	Gui,7: +Resize +AlwaysOnTop ; +Owner avoids a taskbar button.
 	Gui,7: Add, Text, x6 y7 w40 h20 , Player:
 	Gui,7: Add, Edit, x46 y7 w120 h20 vItemPlayer, %ItemPlayer%
 	Gui,7: Add, Radio, x176 y7 w80 h20 vPlayerChoice Checked, Individual
 	Gui,7: Add, Radio, x266 y7 w80 h20 , All Players
 	XPOSMOD := 0
-	YPOSMOD := 1.5
+	YPOSMOD := 1.25
 	Loop, read, %A_WorkingDir%\item_list.txt
 	{
 		StringSplit, param_array, A_LoopReadLine, %A_Tab%
@@ -337,15 +340,16 @@ SpawnItems:
 		XPOSNUM := 175 + (XPOSMOD * 200)
 		Gui,7: Add, Checkbox, vItems%A_Index%_1 X%XPOS% Y%YPOS%, %param_array1%
 		Gui,7: Add, Edit, w27 h20 vItems%A_Index%_2 X%XPOSNUM% Y%YPOSNUM%, %param_array2%
-		if (Mod(A_Index,40) = 0) {
+		if (Mod(A_Index,25) = 0) {
 			XPOSMOD := XPOSMOD + 1
-			YPOSMOD := 1.5
+			YPOSMOD := 1.25
 		}
 		else {
 			YPOSMOD := YPOSMOD + 1
 		}
 	}
-	Gui,7: Add, Button, x356 y7 w430 h20 , OK
+	Gui,7: Add, Button, x356 y7 w200 h20 , OK
+	Gui,7: Add, Text, x570 y10 w1000 h20 , Notice: This menu is possibly going to be a little too big for your windows. I am currently working on a work around for this. 
 	Gui,7: Show, , Rust Admin Item Spawning Menu
 return
 
