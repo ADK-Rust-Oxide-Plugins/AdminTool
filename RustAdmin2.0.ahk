@@ -1,20 +1,8 @@
 ; ************************************************************
 ; ** 	Krevan88's Rust Admin Script                        **
 ; **	Original Concept by [ABSO]BuckeyeMonkey             **
-; ** 	https://github.com/buckeyemonkey/RustAdmin	        **
+; ** 	https://github.com/buckeyemonkey/RustAdmin	    **
 ; ************************************************************
-;
-; =================
-; 	Future Plans
-; =================
-; Multiple Spawning Windows for Different Types of Items.
-; - [ ] Weapons
-; - [ ] Gear/Armor
-; - [ ] Buildings (Possibly Different Windows per type of building.
-; - [ ] Food Stuff
-; 
-; 
-; 
 
 #NoEnv
 #SingleInstance force
