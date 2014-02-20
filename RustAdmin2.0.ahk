@@ -7,7 +7,7 @@
 #NoEnv
 #SingleInstance force
 
-MsgBox,, Krevan's Admin Tool, Thank you for downloading this admin tool. I have made a lot of changes in this version, and welcome you to explore and give your suggestions and opinions on the tool as it is right now.`n`nPlease take the time to read the information contained in the help menu.`n`nF2 - Open Menu`nF12 - Exit Application
+MsgBox,, About Rust Admin Tool, Krevan88's Rust Admin Script v2.0.3 `nhttp://github.com/krevan88/AdminTool `n`nOriginal Version by [ABSO]BuckeyeMonkey `nhttps://github.com/buckeyemonkey/RustAdmin `n`n================================ `n`nFollow the instructions below to run the program. Enjoy.`n`n1.) Run Rust in Windowed Mode (Check Below for Fullscreen Borderless) `n2.) Connect to your server. `n3.) Press F2 to open the Admin Script Menu `n4.) Click Login and Input Server Password `n5.) Enjoy :) `n`n================================ `n`nShortcut Keys `n---------- `nF2 - Admin Menu `nF12 - Quit Script `n`n================================ `n`nPro Tip for Fullscreen Windowed Mode:`nSteam Library > Rust Properties > Launch Options > -popupwindow
 
 Airdrop = How Many Airdrops Do You Want?
 Password = InputPasswordHere
@@ -49,10 +49,8 @@ ShowMainMenu() {
 	Menu, RustMenu, Add, PlayRust.com `t Ctrl+R, PlayRust
 	Menu, RustMenu, Add, Rust Trello, Trello
 	Menu, RustMenu, Add, RustOxide.com, RustOxide
-	Menu, HelpMenu, Add, Krevan's Twitter, Krevan
 	Menu, HelpMenu, Add, Special Thanks, Thanks
-	Menu, HelpMenu, Add, About Script, About
-	Menu, HelpMenu, Add, Download Resources, Download
+	Menu, HelpMenu, Add, Change Log, Changes
 	Menu, MenuBar, Add, File, :FileMenu
 	Menu, MenuBar, Add, Rust Related, :RustMenu
 	Menu, MenuBar, Add, Help, :HelpMenu
@@ -62,19 +60,20 @@ ShowMainMenu() {
 	Gui1 := WinExist()
 	Gui,Main: Menu, MenuBar
 	Gui,Main: Add, Picture, x10 y5 w300 h100 , %A_WorkingDir%\Resources\RustLogo.png
-	Gui,Main: Add, Text, x8 y107 w304 h1 0x7  ;Horizontal Line > Black
-	Gui,Main: Add, Button, x10 y110 w100 h30 gLogin, Admin Login
-	Gui,Main: Add, Button, x110 y110 w100 h30 gLoadout , Admin Loadout
-	Gui,Main: Add, Button, x210 y110 w100 h30 gGodMode , God Mode
-	Gui,Main: Add, Button, x10 y140 w100 h30 gNotice , Server Notice
-	Gui,Main: Add, Button, x110 y140 w100 h30 gStatus , Server Status
-	Gui,Main: Add, Button, x210 y140 w100 h30 gSpawnMenu , Spawn Items
-	Gui,Main: Add, Button, x10 y170 w100 h30 gSupply , Supply Drop
-	Gui,Main: Add, Button, x110 y170 w100 h30 gTeleport , Teleporting
-	Gui,Main: Add, Button, x210 y170 w100 h30 gTime , Time Cycle
-	Gui,Main: Add, Button, x10 y200 w100 h30 gKick , Player Kick
-	Gui,Main: Add, Button, x110 y200 w100 h30 gBan , Player Ban
-	Gui,Main: Add, Button, x210 y200 w100 h30 gSteamID , SteamID Ban
+	Gui,Main: Add, Text, x8 y108 w304 h1 0x7  ;Horizontal Line > Black
+	Gui,Main: Add, Button, x10 y115 w100 h30 gLogin, Admin Login
+	Gui,Main: Add, Button, x110 y115 w100 h30 gLoadout , Admin Loadout
+	Gui,Main: Add, Button, x210 y115 w100 h30 gGodMode , God Mode
+	Gui,Main: Add, Button, x10 y145 w100 h30 gNotice , Server Notice
+	Gui,Main: Add, Button, x110 y145 w100 h30 gStatus , Server Status
+	Gui,Main: Add, Button, x210 y145 w100 h30 gSpawnMenu , Spawn Items
+	Gui,Main: Add, Button, x10 y175 w100 h30 gSupply , Supply Drop
+	Gui,Main: Add, Button, x110 y175 w100 h30 gTeleport , Teleporting
+	Gui,Main: Add, Button, x210 y175 w100 h30 gTime , Time Cycle
+	Gui,Main: Add, Button, x10 y205 w100 h30 gKick , Player Kick
+	Gui,Main: Add, Button, x110 y205 w100 h30 gBan , Player Ban
+	Gui,Main: Add, Button, x210 y205 w100 h30 gSteamID , SteamID Ban
+	Gui,Main: Add, Button, x10 y250 w300 h30 gDownload , Download Spawn Lists and other Resources
 	Gui,Main: Show, , Krevan's Rust Admin Tool
 return
 }
@@ -113,19 +112,15 @@ RustOxide:
 Run, http://forum.rustoxide.com
 return
 
-About:
+Changes:
  Gui +OwnDialogs
-  MsgBox,, About Rust Admin Tool, Krevan88's Rust Admin Script v2.0 `nhttp://github.com/krevan88/AdminTool `n`nOriginal Version by [ABSO]BuckeyeMonkey `nhttps://github.com/buckeyemonkey/RustAdmin `n`n================================ `n`nFollow the instructions below to run the program. Enjoy.`n`n1.) Run Rust in Windowed Mode (Check Below for Fullscreen Borderless) `n2.) Connect to your server. `n3.) Press F2 to open the Admin Script Menu `n4.) Click Login and Input Server Password `n5.) Enjoy :) `n`n================================ `n`nShortcut Keys `n---------- `nF2 - Admin Menu `nF12 - Quit Script `n`n================================ `n`nPro Tip for Fullscreen Windowed Mode:`nSteam Library > Rust Properties > Launch Options > -popupwindow
+  MsgBox,, R.A.T. Change Log,Version 2.0.3:`n  - Moved Resource Downloader to Main GUI window.`n  - Added Location of Downloaded Resources.`n`nVersion 2.0.2:`n  - Added New Spawn Lists`n   -- Building.`n   -- Clothing.`n   -- Food.`n   -- Weapons/Mods.`n   -- Miscellanious.`n`nVersion 2.0.1:`n  - Minor Bug Fixes`n`nVersion 2.0.0:`n  - Initial Relaunch of Admin Tool.
 Return
 
 Thanks:
  Gui +OwnDialogs
   MsgBox,, Special Thanks, There are a lot of people I would like to thank for helping me. `n`n- BuckeyeMonkey @ GitHub for letting me take over this project and make it mine.`n`n- Proxywars @ GitHub for giving me some initial help with the basic commands of AutoHotKey `n`n- twiz @ AHK Community IRC for the help with building the menus and some bug fixing. `n`n- tlm @ AHK Community IRC for helping me troubleshoot issues with the item spawning bug. `n`n- iSkilz @ AHK Community IRC for helping with a program breaking bug in the console commands. `n`n- Church @ PMS Clan Community for helping with the graphics of the program.
 Return
-
-Krevan:
-Run, http://www.twitter.com/krevan88
-return
 
 Download:
 ; Creation of Storage Directory
@@ -145,6 +140,7 @@ URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/clothing_lis
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/food_list.txt, %A_WorkingDir%\Resources\food_list.txt
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/misc_list.txt, %A_WorkingDir%\Resources\misc_list.txt
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/weapon_list.txt, %A_WorkingDir%\Resources\weapon_list.txt
+MsgBox,, Resources Downloaded, Item Spawn Lists downloaded to: `n`n< %A_WorkingDir%\Resources\ >
  
 GuiShow:
  Gui, Show ; Retores the GUI
