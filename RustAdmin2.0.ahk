@@ -7,7 +7,7 @@
 #NoEnv
 #SingleInstance force
 
-MsgBox,, About Rust Admin Tool, Krevan88's Rust Admin Script v2.0.3 `nhttp://github.com/krevan88/AdminTool `n`nOriginal Version by [ABSO]BuckeyeMonkey `nhttps://github.com/buckeyemonkey/RustAdmin `n`n================================ `n`nFollow the instructions below to run the program. Enjoy.`n`n1.) Run Rust in Windowed Mode (Check Below for Fullscreen Borderless) `n2.) Connect to your server. `n3.) Press F2 to open the Admin Script Menu `n4.) Click Login and Input Server Password `n5.) Enjoy :) `n`n================================ `n`nShortcut Keys `n---------- `nF2 - Admin Menu `nF12 - Quit Script `n`n================================ `n`nPro Tip for Fullscreen Windowed Mode:`nSteam Library > Rust Properties > Launch Options > -popupwindow
+MsgBox, , About Rust Admin Tool, Krevan88's Rust Admin Script v2.0.3 `nhttp://github.com/krevan88/AdminTool `n`nOriginal Version by [ABSO]BuckeyeMonkey `nhttps://github.com/buckeyemonkey/RustAdmin `n`n================================ `n`nFollow the instructions below to run the program. Enjoy.`n`n1.) Run Rust in Windowed Mode `n2.) Connect to your server. `n3.) Press F2 to open the Admin Script Menu `n4.) Click Login and Input Server Password `n5.) Enjoy :) `n`n================================ `n`nShortcut Keys `n---------- `nF2 - Admin Menu `nF12 - Quit Script `n`n================================ `n`nPro Tip for Fullscreen Windowed Mode:`n  Steam Library > Rust Properties > Launch Options > -popupwindow
 
 Airdrop = How Many Airdrops Do You Want?
 Password = InputPasswordHere
@@ -73,7 +73,7 @@ ShowMainMenu() {
 	Gui,Main: Add, Button, x10 y205 w100 h30 gKick , Player Kick
 	Gui,Main: Add, Button, x110 y205 w100 h30 gBan , Player Ban
 	Gui,Main: Add, Button, x210 y205 w100 h30 gSteamID , SteamID Ban
-	Gui,Main: Add, Button, x10 y250 w300 h30 gDownload , Download Spawn Lists and other Resources
+	Gui,Main: Add, Button, x10 y245 w300 h30 gDownload , Download Spawn Lists and other Resources
 	Gui,Main: Show, , Krevan's Rust Admin Tool
 return
 }
@@ -114,7 +114,7 @@ return
 
 Changes:
  Gui +OwnDialogs
-  MsgBox,, R.A.T. Change Log,Version 2.0.3:`n  - Moved Resource Downloader to Main GUI window.`n  - Added Location of Downloaded Resources.`n`nVersion 2.0.2:`n  - Added New Spawn Lists`n   -- Building.`n   -- Clothing.`n   -- Food.`n   -- Weapons/Mods.`n   -- Miscellanious.`n`nVersion 2.0.1:`n  - Minor Bug Fixes`n`nVersion 2.0.0:`n  - Initial Relaunch of Admin Tool.
+  MsgBox,, R.A.T. Change Log,Version 2.0.3:`n  - Moved Resource Download to Main GUI window.`n - Added download notification windows.`n  - Added Location of Downloaded Resources.`n`nVersion 2.0.2:`n  - Added New Spawn Lists`n   -- Building.`n   -- Clothing.`n   -- Food.`n   -- Weapons/Mods.`n   -- Miscellanious.`n`nVersion 2.0.1:`n  - Minor Bug Fixes`n`nVersion 2.0.0:`n  - Initial Relaunch of Admin Tool.
 Return
 
 Thanks:
@@ -123,24 +123,26 @@ Thanks:
 Return
 
 Download:
+MsgBox, 49, ALERT!, You're about to download some required files for the program.`n`nFiles will be downloaded to: `n< %A_WorkingDir%\Resources\ >`n`n`nAnother window will pop-up when download is complete.
 ; Creation of Storage Directory
 FileCreateDir, %A_WorkingDir%\Resources\
-; Image for the Main Menu
-URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/RustLogo.png, %A_WorkingDir%\Resources\RustLogo.png
 ; Delete Old List Files.
+FileDelete, %A_WorkingDir%\Resources\RustLogo.png
 FileDelete, %A_WorkingDir%\Resources\item_list.txt
 FileDelete, %A_WorkingDir%\Resources\building_list.txt
 FileDelete, %A_WorkingDir%\Resources\clothing_list.txt
 FileDelete, %A_WorkingDir%\Resources\food_list.txt
 FileDelete, %A_WorkingDir%\Resources\misc_list.txt
 FileDelete, %A_WorkingDir%\Resources\weapon_list.txt
+; Image for the Main Menu
+URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/RustLogo.png, %A_WorkingDir%\Resources\RustLogo.png
 ; Download Up-To Date List Files.
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/building_list.txt, %A_WorkingDir%\Resources\building_list.txt
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/clothing_list.txt, %A_WorkingDir%\Resources\clothing_list.txt
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/food_list.txt, %A_WorkingDir%\Resources\food_list.txt
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/misc_list.txt, %A_WorkingDir%\Resources\misc_list.txt
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/weapon_list.txt, %A_WorkingDir%\Resources\weapon_list.txt
-MsgBox,, Resources Downloaded, Item Spawn Lists downloaded to: `n`n< %A_WorkingDir%\Resources\ >
+MsgBox, ,Resources Downloaded, Files have been downloaded. Have a nice day. 
  
 GuiShow:
  Gui, Show ; Retores the GUI

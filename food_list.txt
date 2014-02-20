@@ -1,8 +1,0 @@
-Can of Beans	1
-Can of Tuna	1
-Chocolate Bar	1
-Cooked Chicken Breast	250
-Granola Bar	1
-Raw Chicken Breast	1
-Small Rations	1
-Small Water Bottle	1
