@@ -1,13 +1,16 @@
 ; ************************************************************
-; ** 	Krevan88's Rust Admin Script                        **
+; ** 	Carbon Admin Tool by @C6_Creations                  **
+; **	Coding and Design by @Krevan88 of @C6_Creations     **
+; **	Source Code: www.github.com/krevan88/AdminTool      **
+; ************************************************************
 ; **	Original Concept by [ABSO]BuckeyeMonkey             **
-; ** 	https://github.com/buckeyemonkey/RustAdmin	    **
+; ** 	https://github.com/buckeyemonkey/RustAdmin	    	**
 ; ************************************************************
 
 #NoEnv
 #SingleInstance force
 
-MsgBox, , About Rust Admin Tool, Krevan88's Rust Admin Script v2.0.3 `nhttp://github.com/krevan88/AdminTool `n`nOriginal Version by [ABSO]BuckeyeMonkey `nhttps://github.com/buckeyemonkey/RustAdmin `n`n================================ `n`nFollow the instructions below to run the program. Enjoy.`n`n1.) Run Rust in Windowed Mode `n2.) Connect to your server. `n3.) Press F2 to open the Admin Script Menu `n4.) Click Login and Input Server Password `n5.) Enjoy :) `n`n================================ `n`nShortcut Keys `n---------- `nF2 - Admin Menu `nF12 - Quit Script `n`n================================ `n`nPro Tip for Fullscreen Windowed Mode:`n  Steam Library > Rust Properties > Launch Options > -popupwindow
+MsgBox, , About Carbon Admin Tool, Carbon Admin Tool v2.0.4 `nhttp://github.com/krevan88/AdminTool `n`nOriginal Version by [ABSO]BuckeyeMonkey `nhttps://github.com/buckeyemonkey/RustAdmin `n`n================================ `n`nFollow the instructions below to run the program. Enjoy.`n`n1.) Run Rust in Windowed Mode `n2.) Connect to your server. `n3.) Press F2 to open the Admin Script Menu `n4.) Click Login and Input Server Password `n5.) Enjoy :) `n`n================================ `n`nShortcut Keys `n---------- `nF2 - Admin Menu `nF12 - Quit Script `n`n================================ `n`nPro Tip for Fullscreen Windowed Mode:`n  Steam Library > Rust Properties > Launch Options > -popupwindow
 
 Airdrop = How Many Airdrops Do You Want?
 Password = InputPasswordHere
@@ -37,20 +40,36 @@ F2::
 return
 
 F12::
-    ToolTip,Exiting Rust Admin Script. Thanks for using it.,XCenter,YCenter
+    ToolTip,Exiting Carbon Admin Tool. Come Back Soon!,XCenter,YCenter
     Sleep 1000
     ExitApp
 return
 
+^r::
+	IfWinNotExist, PlayRust
+{
+    ; Launch Rust game via Steam AppID
+    Run steam://run/252490
+    WinWaitActive, PlayRust Configuration, , 10
+}
+
+	if WinExist("PlayRust Configuration") or WinExist(ahk_class #32770)
+{
+    WinActivate
+    WinWaitActive, PlayRust Configuration, , 5
+    Send {Enter}
+}
+Return
+
 ShowMainMenu() {
 ; MainMenuMenu 
-	Menu, FileMenu, Add, Run Rust `t Ctrl+O, MenuOpenRust
 	Menu, FileMenu, Add, Exit, GuiClose
-	Menu, RustMenu, Add, PlayRust.com `t Ctrl+R, PlayRust
+	Menu, RustMenu, Add, PlayRust.com, PlayRust
 	Menu, RustMenu, Add, Rust Trello, Trello
 	Menu, RustMenu, Add, RustOxide.com, RustOxide
-	Menu, HelpMenu, Add, Special Thanks, Thanks
 	Menu, HelpMenu, Add, Change Log, Changes
+	Menu, HelpMenu, Add, Credits and Thanks, Credit
+	Menu, HelpMenu, Add, Buy Me A Beer, Donate
 	Menu, MenuBar, Add, File, :FileMenu
 	Menu, MenuBar, Add, Rust Related, :RustMenu
 	Menu, MenuBar, Add, Help, :HelpMenu
@@ -60,47 +79,28 @@ ShowMainMenu() {
 	Gui1 := WinExist()
 	Gui,Main: Menu, MenuBar
 	Gui,Main: Add, Picture, x10 y5 w300 h100 , %A_WorkingDir%\Resources\RustLogo.png
-	Gui,Main: Add, Text, x8 y108 w304 h1 0x7  ;Horizontal Line > Black
-	Gui,Main: Add, Button, x10 y115 w100 h30 gLogin, Admin Login
-	Gui,Main: Add, Button, x110 y115 w100 h30 gLoadout , Admin Loadout
-	Gui,Main: Add, Button, x210 y115 w100 h30 gGodMode , God Mode
-	Gui,Main: Add, Button, x10 y145 w100 h30 gNotice , Server Notice
-	Gui,Main: Add, Button, x110 y145 w100 h30 gStatus , Server Status
-	Gui,Main: Add, Button, x210 y145 w100 h30 gSpawnMenu , Spawn Items
-	Gui,Main: Add, Button, x10 y175 w100 h30 gSupply , Supply Drop
-	Gui,Main: Add, Button, x110 y175 w100 h30 gTeleport , Teleporting
-	Gui,Main: Add, Button, x210 y175 w100 h30 gTime , Time Cycle
-	Gui,Main: Add, Button, x10 y205 w100 h30 gKick , Player Kick
-	Gui,Main: Add, Button, x110 y205 w100 h30 gBan , Player Ban
-	Gui,Main: Add, Button, x210 y205 w100 h30 gSteamID , SteamID Ban
-	Gui,Main: Add, Button, x10 y245 w300 h30 gDownload , Download Spawn Lists and other Resources
-	Gui,Main: Show, , Krevan's Rust Admin Tool
+	Gui,Main: Add, Text, x8 y109 w304 h1 0x7  ;Horizontal Line > Black
+	Gui,Main: Add, Button, x10 y115 w149 h25 gDownload , DOWNLOAD UPDATES
+	Gui,Main: Add, Button, x163 y115 w149 h25 gTwitter, FOLLOW US FOR MORE
+	Gui,Main: Add, Button, x10 y145 w98 h25 gLogin, ADMIN LOGIN
+	Gui,Main: Add, Button, x111 y145 w98 h25 gLoadout , ADMIN GEAR
+	Gui,Main: Add, Button, x212 y145 w98 h25 gGodMode , GOD MODE
+	Gui,Main: Add, Button, x10 y171 w98 h25 gNotice , SERVER NOTICE
+	Gui,Main: Add, Button, x111 y171 w98 h25 gStatus , SERVER STATUS
+	Gui,Main: Add, Button, x212 y171 w98 h25 gSpawnMenu , ITEM SPAWN
+	Gui,Main: Add, Button, x10 y197 w98 h25 gSupply , SUPPLY DROPS
+	Gui,Main: Add, Button, x111 y197 w98 h25 gTeleport , TELEPORT
+	Gui,Main: Add, Button, x212 y197 w98 h25 gTime , TIME CYCLE
+	Gui,Main: Add, Button, x10 y223 w98 h25 gKick , KICK PLAYER
+	Gui,Main: Add, Button, x111 y223 w98 h25 gBan , BAN PLAYER
+	Gui,Main: Add, Button, x212 y223 w98 h25 gSteamID , BAN STEAMID
+	Gui,Main: Show, , Carbon Admin Tool by Carbonic Creations
 return
 }
 
 ; Menu Bar Begin ******************************************************
  
-#IfWinActive Menu Test ahk_class AutoHotkeyGUI
-^o::  ; The Ctrl+O hotkey.
-MenuOpenRust:
-IfWinNotExist, PlayRust
-{
-    ; Launch Rust game via Steam AppID
-    Run steam://run/252490
-    WinWaitActive, PlayRust Configuration, , 10
-}
-
-if WinExist("PlayRust Configuration") or WinExist(ahk_class #32770)
-{
-    WinActivate
-    WinWaitActive, PlayRust Configuration, , 5
-    Send {Enter}
-}
-Return
-
 PlayRust:
-#IfWinActive Menu Test ahk_class AutoHotkeyGUI
-^r::  ; The Ctrl+R hotkey.
 Run, http://www.playrust.com
 return
 
@@ -114,16 +114,24 @@ return
 
 Changes:
  Gui +OwnDialogs
-  MsgBox,, R.A.T. Change Log,Version 2.0.3:`n  - Moved Resource Download to Main GUI window.`n - Added download notification windows.`n  - Added Location of Downloaded Resources.`n`nVersion 2.0.2:`n  - Added New Spawn Lists`n   -- Building.`n   -- Clothing.`n   -- Food.`n   -- Weapons/Mods.`n   -- Miscellanious.`n`nVersion 2.0.1:`n  - Minor Bug Fixes`n`nVersion 2.0.0:`n  - Initial Relaunch of Admin Tool.
+  MsgBox,, Carbon Admin Assistant Change Log,Version 2.0.4`n  - Changed the name of the tool.`n  - Added Twitter Button for Support`n  - Added Donation Link in Help Menu `n`n`Version 2.0.3:`n  - Moved Resource Download to Main GUI window.`n  - Added download notification windows.`n  - Added Location of Downloaded Resources.`n`nVersion 2.0.2:`n  - Added New Spawn Lists`n   -- Building.`n   -- Clothing.`n   -- Food.`n   -- Weapons/Mods.`n   -- Miscellanious.`n`nVersion 2.0.1:`n  - Minor Bug Fixes`n`nVersion 2.0.0:`n  - Initial Relaunch of Admin Tool.
 Return
 
-Thanks:
+Credit:
  Gui +OwnDialogs
-  MsgBox,, Special Thanks, There are a lot of people I would like to thank for helping me. `n`n- BuckeyeMonkey @ GitHub for letting me take over this project and make it mine.`n`n- Proxywars @ GitHub for giving me some initial help with the basic commands of AutoHotKey `n`n- twiz @ AHK Community IRC for the help with building the menus and some bug fixing. `n`n- tlm @ AHK Community IRC for helping me troubleshoot issues with the item spawning bug. `n`n- iSkilz @ AHK Community IRC for helping with a program breaking bug in the console commands. `n`n- Church @ PMS Clan Community for helping with the graphics of the program.
+  MsgBox,, Credits, Carbon Admin Tool was created by @Krevan88 of Carbonic Creations using AutoHotKey as a learning project. I would like to thank those who helped me in the learning and creation of this tool. `n`n- BuckeyeMonkey @ GitHub for letting me take over this project and make it mine.`n`n- Proxywars @ GitHub for giving me some initial help with the basic commands of AutoHotKey `n`n- twiz @ AHK Community IRC for the help with building the menus and some bug fixing. `n`n- tlm @ AHK Community IRC for helping me troubleshoot issues with the item spawning bug. `n`n- iSkilz @ AHK Community IRC for helping with a program breaking bug in the console commands.
+Return
+
+Donate:
+Run, https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=G4KC3B34VWBSY ;Donation Page
+Return
+
+Twitter:
+Run, http://www.twitter.com/C6_Creations
 Return
 
 Download:
-MsgBox, 49, ALERT!, You're about to download some required files for the program.`n`nFiles will be downloaded to: `n< %A_WorkingDir%\Resources\ >`n`n`nAnother window will pop-up when download is complete.
+MsgBox, 49, ALERT!, You're about to download some required files for the program.`n`nFiles will be downloaded to: `n[ %A_WorkingDir%\Resources\ ]`n`n`nAnother window will pop-up to notify you when download is done.
 ; Creation of Storage Directory
 FileCreateDir, %A_WorkingDir%\Resources\
 ; Delete Old List Files.
@@ -142,7 +150,7 @@ URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/clothing_lis
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/food_list.txt, %A_WorkingDir%\Resources\food_list.txt
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/misc_list.txt, %A_WorkingDir%\Resources\misc_list.txt
 URLDownloadToFile, *0 https://dl.dropboxusercontent.com/u/178259890/weapon_list.txt, %A_WorkingDir%\Resources\weapon_list.txt
-MsgBox, ,Resources Downloaded, Files have been downloaded. Have a nice day. 
+MsgBox, ,Resources Downloaded, Files have been downloaded to:`n[ %A_WorkingDir%\Resources\ ]`n`nHave a nice day. 
  
 GuiShow:
  Gui, Show ; Retores the GUI
@@ -1352,9 +1360,6 @@ return
 13GuiClose:
 	Gui,13:Destroy
 return
-
-; Test Window for Separate Spawn Menus ======================================================
-
 
 ; Execute All Commands Script ======================================================
 ExecuteCommand(command) {
