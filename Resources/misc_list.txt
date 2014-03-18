@@ -15,6 +15,7 @@ Flare	1
 Flare Blueprint	1
 Furnace	1
 Furnace Blueprint	1
+Handmade Lockpick	1
 Large Medkit	1
 Large Medkit Blueprint	1
 Large Spike Wall	1
